@@ -11,8 +11,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57321e68-d46b-407b-8fdf-ffaa32e9b1f6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/pages/fb_login.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FacebookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FacebookController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,8 +150,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Laragon weby\www\turistika\public\css" />
+      <recent name="D:\Laragon weby\www\turistika\public\storage" />
       <recent name="D:\Laragon weby\www\turistika\resources\views" />
+      <recent name="D:\Laragon weby\www\turistika\public\css" />
     </key>
   </component>
   <component name="RunManager">
@@ -168,7 +171,7 @@
       <updated>1610138678003</updated>
       <workItem from="1610138679032" duration="7861000" />
       <workItem from="1610205173571" duration="17123000" />
-      <workItem from="1610297897065" duration="2463000" />
+      <workItem from="1610297897065" duration="10067000" />
     </task>
     <servers />
   </component>
@@ -216,6 +219,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="612" y="185" width="523" height="453" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1610222763394" />
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1610304953433">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1610304953433" />
     <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1610138684629">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

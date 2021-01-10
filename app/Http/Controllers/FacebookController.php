@@ -19,14 +19,15 @@ class FacebookController extends Controller
         $this->FacebookService=$facebookService;
         $this->UserRepository=$userRepository;
     }
+
+    /*
+     * Login screen for facebook
+     */
     public function login()
     {
-
+        if (session())
         session()->put('previous_url', URL::previous());
-
-        var_dump(session()->get('success'));
-        var_dump(session()->get('previous_url'));
-        return '<a href="http://localhost/turistika/public/facebook/redirect">Login</a>';
+        return view('pages.fb_login');
 
     }
 
@@ -43,15 +44,21 @@ class FacebookController extends Controller
 
     public function callback()
     {
+        /*
+         * Get user informations from facebook and update/create user in database
+         */
         $user = Socialite::driver('facebook')->user();
-        $is_member= $this->FacebookService->IsMember($user->token);
         $this->UserRepository->UpdateOrCreate($user);
 
-
+        /*
+         * Save user token and name to session
+         */
         session()->put('user_token',$user->token);
         session()->put('name',$user->getName());
-        session()->put('is_member',$is_member);
 
+        /*
+         * Redirect to url "before" Login screen
+         */
         return Redirect::to(session()->get('previous_url'))->with('success', 'Bol si úspešne prihlásený ako '.$user->Getname());
     }
 
