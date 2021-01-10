@@ -11,10 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57321e68-d46b-407b-8fdf-ffaa32e9b1f6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/fb_login.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FacebookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FacebookController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +170,7 @@
       <updated>1610138678003</updated>
       <workItem from="1610138679032" duration="7861000" />
       <workItem from="1610205173571" duration="17123000" />
-      <workItem from="1610297897065" duration="10067000" />
+      <workItem from="1610297897065" duration="10274000" />
     </task>
     <servers />
   </component>
@@ -223,9 +222,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1610304953433" />
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1610138684629">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="498" y="178" width="672" height="538" key="search.everywhere.popup" timestamp="1610308017887">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="498" y="178" width="672" height="538" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1610308017887" />
     <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1610138684629" />
   </component>
 </project>
