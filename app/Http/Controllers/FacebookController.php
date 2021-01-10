@@ -62,6 +62,12 @@ class FacebookController extends Controller
         return Redirect::to(session()->get('previous_url'))->with('success', 'Bol si úspešne prihlásený ako '.$user->Getname());
     }
 
+    public function logout()
+    {
+        session()->forget(['user_token','name']);
+        return Redirect::to(route('FbLogin'))->with('success','Bol si úspešne odhlásený');
+    }
+
 
 
 }

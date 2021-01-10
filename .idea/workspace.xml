@@ -12,7 +12,7 @@
   <component name="ChangeListManager">
     <list default="true" id="57321e68-d46b-407b-8fdf-ffaa32e9b1f6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FacebookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FacebookController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -142,6 +142,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -170,7 +171,7 @@
       <updated>1610138678003</updated>
       <workItem from="1610138679032" duration="7861000" />
       <workItem from="1610205173571" duration="17123000" />
-      <workItem from="1610297897065" duration="12512000" />
+      <workItem from="1610297897065" duration="13035000" />
     </task>
     <servers />
   </component>
