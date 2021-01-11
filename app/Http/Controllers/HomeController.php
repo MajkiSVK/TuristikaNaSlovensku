@@ -30,6 +30,23 @@ class HomeController extends Controller
      */
     public function save(Request $request)
     {
+        $save=$this->userRepository->saveUserContact(session()->get('facebook_id'),$request);
+        return $save;
+    }
+
+    /*
+     *Delete user contact informations
+     */
+    public function delete_contact(Request $request)
+    {
+        dd($request->user_phone);
+    }
+
+    /*
+     * Delete user profile
+     */
+    public function delete_profile(Request $request)
+    {
         dd($request->User_phone);
     }
 }
