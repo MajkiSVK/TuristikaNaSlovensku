@@ -40,7 +40,7 @@ class UserRepository
     public function RemoveUserContact($facebook_id)
     {
         $user= User::WHERE('facebook_id', $facebook_id)->firstOrFail();
-        $user->phone_number='';
+        $user->phone_number=NULL;
         $user->save();
         return back()->with('success', 'Tvoje údaje boli úspešne vymazané');
     }

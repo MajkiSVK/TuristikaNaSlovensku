@@ -37,9 +37,10 @@ class HomeController extends Controller
     /*
      *Delete user contact informations
      */
-    public function delete_contact(Request $request)
+    public function delete_contact()
     {
-        dd($request->user_phone);
+        $delete=$this->userRepository->RemoveUserContact(session()->get('facebook_id'));
+        return $delete;
     }
 
     /*
