@@ -55,6 +55,7 @@ class FacebookController extends Controller
          */
         session()->put('user_token',$user->token);
         session()->put('name',$user->getName());
+        session()->put('facebook_id',$user->getId());
 
         /*
          * Redirect to url "before" Login screen
@@ -64,7 +65,7 @@ class FacebookController extends Controller
 
     public function logout()
     {
-        session()->forget(['user_token','name']);
+        session()->forget(['user_token','name','facebook_id']);
         return Redirect::to(route('FbLogin'))->with('success','Bol si úspešne odhlásený');
     }
 
