@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return 'Si prihlásený ako '.session()->get('name');
-})->middleware('FbAuth');
+Route::get('/', 'HomeController@main')->name('home')->middleware('FbAuth');
+Route::POST('/save', 'HomeController@save')->name('save_profile')->middleware('FbAuth');
 
 Route::get('/facebook/login', 'FacebookController@login')->name('FbLogin');
 Route::get('/facebook/redirect', 'FacebookController@redirect')->name('FbRedirect');
