@@ -25,12 +25,12 @@ home
                 <div id="empty" class="col-12"></div>
 
                 <label for="contact_mail" class="col-3 text-right mb-3"><b>Kontaktný E-mail</b></label>
-                <input name="contact_mail" type="text" class="col-5 mb-3" value="{{$user['email']}}">
+                <input name="contact_mail" type="email" class="col-5 mb-3" value="{{$user['email']}}">
 
                 <div id="empty" class="col-12 text-center"><i>Telefónne číslo zadávajte bez znaku <b>+</b> . Napríklad 421 900 000 000, alebo 420 000 000 000 </i></div>
 
                 <label for="user_phone" class="col-3 text-right mb-3"><b>Telefónne číslo: +</b></label>
-                <input name="user_phone" type="text" class="col-5 mb-3" value="{{$user['phone_number']}}">
+                <input name="user_phone" type="tel" class="col-5 mb-3" pattern="[0-9]{12}" value="{{$user['phone_number']}}">
 
                 <div id="info" class="col-12 text-center"><i>Zmeniť je možné len biele polia (kontaktné údaje),
                         ostatné sú prevzaté z facebooku. Pri výherca súťaže je vždy kontaktovaný prioritne cez telefón</i></div>
