@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@main')->name('home')->middleware('FbAuth');
 Route::POST('/save', 'HomeController@save')->name('save_profile')->middleware('FbAuth');
-Route::POST('/delete_contact', 'HomeController@delete_contact')->name('delete_contact')->middleware('FbAuth');
-Route::POST('/delete_profile', 'HomeController@delete_profile')->name('delete_profile')->middleware('FbAuth');
+Route::get('/delete_contact', 'HomeController@delete_contact')->name('delete_contact')->middleware('FbAuth');
+Route::get('/delete_profile', 'HomeController@delete_profile')->name('delete_profile')->middleware('FbAuth');
 
 Route::get('/facebook/login', 'FacebookController@login')->name('FbLogin');
 Route::get('/facebook/redirect', 'FacebookController@redirect')->name('FbRedirect');
