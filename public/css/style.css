@@ -3,6 +3,10 @@
     font-family: "Garamond, serif", cursive;
 }
 
+.home{
+    height: 100vh;
+}
+
 .login_button{
     background-color: #a36926;
     font-size: 3vw;
