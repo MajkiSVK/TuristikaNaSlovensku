@@ -11,30 +11,39 @@ home
         <hr>
         <h1><u>Tvoj profil</u> </h1>
 
-        {{----}}
+        {{-- form body (empty divs just for new "row" xD--}}
         <div id="profile_body" class="row justify-content-center">
-            <form method="post" action="{{URL::route('save_profile')}}"> @csrf
+            {{--form header--}}
+            <form method="post" action="{{URL::route('save_profile')}}">
+                @csrf
+
+                {{--user name input--}}
                 <label for="user_name" class="col-3 text-right mb-3"><b>Meno</b></label>
                 <input name="user_name" type="text" class="col-5 mb-3" value="{{$user['name']}}" disabled>
 
                 <div id="empty" class="col-12"></div>
 
+                {{--user mail input--}}
                 <label for="user_mail" class="col-3 text-right mb-3"><i>(facebook)</i><b> E-mail</b></label>
                 <input name="user_mail" type="text" class="col-5 mb-3" value="{{$user['email']}}" disabled>
 
                 <div id="empty" class="col-12"></div>
 
+                {{--contact mail input (custom mail for contact--}}
                 <label for="contact_mail" class="col-3 text-right mb-3"><b>Kontaktný E-mail</b></label>
                 <input name="contact_mail" type="email" class="col-5 mb-3" value="{{$user['email']}}">
 
                 <div id="empty" class="col-12 text-center"><i>Telefónne číslo zadávajte bez znaku <b>+</b> . Napríklad 421 900 000 000, alebo 420 000 000 000 </i></div>
 
+                {{--user phone for contact--}}
                 <label for="user_phone" class="col-3 text-right mb-3"><b>Telefónne číslo: +</b></label>
                 <input name="user_phone" type="tel" class="col-5 mb-3" pattern="[0-9]{12}" value="{{$user['phone_number']}}">
 
+                {{--info text--}}
                 <div id="info" class="col-12 text-center"><i>Zmeniť je možné len biele polia (kontaktné údaje),
-                        ostatné sú prevzaté z facebooku. Pri výherca súťaže je vždy kontaktovaný prioritne cez telefón</i></div>
+                        ostatné sú prevzaté z facebooku. Výherca súťaže je vždy kontaktovaný prioritne cez telefón</i></div>
 
+                {{--Buttons--}}
                 <input type="submit" class="btn btn-success col-3 " value="Uložiť">
                 <a href="#" onclick="deleteContact()"><span id="delete_contact" class="btn btn-danger col-3">Vymazať kontaktné údaje</span></a>
                 <a href="#" onclick="deleteProfile()"><span id="delete_profile" class="btn btn-dark col-3">Vymazať celý profil</span></a>
