@@ -36,11 +36,29 @@ home
                         ostatné sú prevzaté z facebooku. Pri výherca súťaže je vždy kontaktovaný prioritne cez telefón</i></div>
 
                 <input type="submit" class="btn btn-success col-3 " value="Uložiť">
-                <a href="{{ URL::route('delete_contact') }}"><span id="delete_contact" class="btn btn-danger col-3">Vymazať kontaktné údaje</span></a>
-                <a href="{{URL::route('delete_profile')}}"><span id="delete_profile" class="btn btn-dark col-3">Vymazať celý profil</span></a>
+                <a href="#" onclick="deleteContact()"><span id="delete_contact" class="btn btn-danger col-3">Vymazať kontaktné údaje</span></a>
+                <a href="#" onclick="deleteProfile()"><span id="delete_profile" class="btn btn-dark col-3">Vymazať celý profil</span></a>
                 <a href="{{URL::route('FbLogout')}}"><span id="logout" class="btn btn-primary text-break col-2">Odhlásiť sa</span></a>
             </form>
 
         </div>
     </center>
+
+
+
+    <script>
+        function deleteContact() {
+            if(confirm("Naozaj chceš vymazať svoje kontaktné údaje? V prípade že si zapojený/á do súťaže a " +
+                "vyhráš, nebuemožné ťa kontaktovať a výhra prepadne ďalšiemu v poradí.")){
+                window.location.href="{{ URL::route('delete_contact') }}";
+            };
+        }
+
+        function deleteProfile() {
+            if(confirm("Naozaj chceš vymazať svoj profil? V prípade že si zapojený/á do súťaže, " +
+                "budeš z nej automaticky vyradený/á")){
+                window.location.href="{{ URL::route('delete_profile') }}";
+            };
+        }
+    </script>
 @stop
