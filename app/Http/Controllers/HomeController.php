@@ -46,7 +46,7 @@ class HomeController extends Controller
     /*
      * Delete user profile
      */
-    public function delete_profile(Request $request)
+    public function delete_profile()
     {
         $delete_profile=$this->userRepository->DeleteUserProfile(session()->get('facebook_id'));
         session()->forget(['user_token','name','facebook_id']);
