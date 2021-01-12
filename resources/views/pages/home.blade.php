@@ -56,6 +56,10 @@ home
 
 
     <script>
+
+        /*
+        * Confirmation text for deleting contact information
+        */
         function deleteContact() {
             if(confirm("Naozaj chceš vymazať svoje kontaktné údaje? V prípade že si zapojený/á do súťaže a " +
                 "vyhráš, nebuemožné ťa kontaktovať a výhra prepadne ďalšiemu v poradí.")){
@@ -63,6 +67,9 @@ home
             };
         }
 
+        /*
+        * Confirmation text for deleting user profile
+         */
         function deleteProfile() {
             if(confirm("Naozaj chceš vymazať svoj profil? V prípade že si zapojený/á do súťaže, " +
                 "budeš z nej automaticky vyradený/á")){
