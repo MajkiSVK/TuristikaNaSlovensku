@@ -25,8 +25,21 @@ class FacebookController extends Controller
      */
     public function login()
     {
-        if (session())
-        session()->put('previous_url', URL::previous());
+        /*
+         * Make session for URL, where will be redirected user after facebook callback
+         */
+        if (URL::previous()===URL::route('FbLogin')){
+            session()->put('previous_url', URL::route('home'));
+        }else{
+            session()->put('previous_url', URL::previous());
+        }
+        /*
+         * If the user is logged in, redirect to the previous URL
+         */
+        if (session()->get('user_token')){
+            return Redirect::to(session()->get('previous_url'))->with('error','Už si prihlásený, takže sa nemôžeš znova prihlásiť!');
+        }
+
         return view('pages.fb_login');
 
     }
