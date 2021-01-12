@@ -37,7 +37,7 @@ home
 
                 <input type="submit" class="btn btn-success col-3 " value="Uložiť">
                 <a href="{{ URL::route('delete_contact') }}"><span id="delete_contact" class="btn btn-danger col-3">Vymazať kontaktné údaje</span></a>
-                <a href="#"><span id="delete_profile" class="btn btn-dark col-3">Vymazať celý profil</span></a>
+                <a href="{{URL::route('delete_profile')}}"><span id="delete_profile" class="btn btn-dark col-3">Vymazať celý profil</span></a>
                 <a href="{{URL::route('FbLogout')}}"><span id="logout" class="btn btn-primary text-break col-2">Odhlásiť sa</span></a>
             </form>
 

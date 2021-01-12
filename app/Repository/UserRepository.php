@@ -5,6 +5,7 @@ namespace App\Repository;
 
 
 use App\User;
+use Illuminate\Support\Facades\Redirect;
 
 class UserRepository
 {
@@ -43,5 +44,13 @@ class UserRepository
         $user->phone_number=NULL;
         $user->save();
         return back()->with('success', 'Tvoje údaje boli úspešne vymazané');
+    }
+
+    public function DeleteUserProfile($facebook_id)
+    {
+        $user= User::WHERE('facebook_id', $facebook_id)->firstOrFail();
+        $user->delete();
+
+        return Redirect::to(route('FbLogin'))->with('success','Tvoj profil bol úspešne vymazaný.');
     }
 }
