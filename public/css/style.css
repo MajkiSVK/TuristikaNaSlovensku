@@ -52,3 +52,10 @@
     width: 90% !important;
 }
 
+.carousel-caption{
+-webkit-text-stroke-width: 2px;
+-webkit-text-stroke-color: black;
+bottom: 10%;
+    opacity: 60%;
+}
+
