@@ -26,3 +26,13 @@
     text-decoration: none;
     text-align: center;
 }
+
+.gallery_img {
+    max-width:100%;
+    min-height:100px;
+}
+.gallery_img_div {
+    max-height:145px;
+    overflow:hidden;
+}
+

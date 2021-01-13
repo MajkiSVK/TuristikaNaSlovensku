@@ -22,3 +22,5 @@ Route::get('/facebook/login', 'FacebookController@login')->name('FbLogin');
 Route::get('/facebook/redirect', 'FacebookController@redirect')->name('FbRedirect');
 Route::get('/facebook/callback', 'FacebookController@callback')->name('FbCallback');
 Route::get('/facebook/logout', 'FacebookController@logout')->name('FbLogout')->middleware('FbAuth');
+
+Route::get('{contest}/gallery', 'ContestController@gallery')->name('contest_gallery');
