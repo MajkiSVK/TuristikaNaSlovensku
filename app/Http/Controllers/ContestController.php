@@ -20,4 +20,16 @@ class ContestController extends Controller
                 ->with('images',$images)
                 ->with('name', $request->contest);
     }
+
+    public function photo(Request $request)
+    {
+        $photo=['URL'=>'public/storage/contest/test_image.jpg',
+                'Author'=>'Tomáš Majki Miki Mikuláš',
+                'Description'=>'Fotené u tvojej mamy doma na záhrade keď tancovala',
+                ];
+
+        return view('pages.contest.photo')
+            ->with('request',$request)
+            ->with('photo', $photo);
+    }
 }
