@@ -6,13 +6,41 @@
 
 
 @section('container')
-<div id="photo_body" class="row justify-content-center vh-100">
-    <span class="col-10 col-md-2 text-break mt-3"><small>Fotografia od</small><br><b>{{$photo['Author']}}</b></span>
-    <span class="col-12 col-md-8 text-center text-break mt-3"><h2>{{$photo['Description']}}</h2></span>
-    <div class="col-2 order-first order-md-0 col-md-2 text-right mt-3"> <span class="btn btn-success">Lajk 1000</span></div>
+<div id="photo_body" class="vh-100">
 
-    <div class="col-12 text-center"> <img src="https://localhost/turistika/{{$photo['URL']}}" class="w-75"></div>
-{{var_dump($request->photo_id)}}
-{{var_dump($request->contest)}}</div>
+<center>
+    <div id="carouselExampleControls" class="carousel w-90" >
+        <div class="carousel-inner">
+
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="https://localhost/turistika/{{$photo['URL']}}" alt="First slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="..." alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="..." alt="Third slide">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="##" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+
+    </div>
+    <span class=" "><b>{{$photo['Description']}}</b></span>
+
+</center>
+    <div id="photo_header" class="row justify-content-between">
+        <span class="col-8 text-break"><small><u>Autor: </u></small><b>{{$photo['Author']}}</b></span>
+        <div class="col-4 text-right"> <span class="btn btn-success">Lajk 1000</span></div>
+    </div>
 </div>
+
+
+
 @stop
