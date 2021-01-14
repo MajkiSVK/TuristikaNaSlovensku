@@ -20,6 +20,6 @@ class Contest extends Model
 
     public function photos()
     {
-        $this->hasMany('App\Photo');
+        return $this->hasMany('App\Photo');
     }
 }
