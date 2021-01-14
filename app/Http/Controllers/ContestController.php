@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 class ContestController extends Controller
 {
+    /*
+     * Show gallery page
+     */
     public function gallery(Request $request)
     {
         $images=['0'=>'public/storage/contest/test_image.jpg',
@@ -21,6 +24,9 @@ class ContestController extends Controller
                 ->with('name', $request->contest);
     }
 
+    /*
+     * Show photo page
+     */
     public function photo(Request $request)
     {
         $photo=['URL'=>'public/storage/contest/test_image.jpg',
