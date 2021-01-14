@@ -13,11 +13,11 @@ class Photo extends Model
 
     public function contest()
         {
-            $this->belongsTo('App\Contest');
+            return $this->belongsTo('App\Contest');
         }
 
     public function user()
         {
-          $this->belongsTo('App\User');
+          return $this->belongsTo('App\User');
         }
 }
