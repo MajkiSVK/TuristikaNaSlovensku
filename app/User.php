@@ -28,4 +28,9 @@ class User extends Authenticatable
         'facebook_id',
     ];
 
+    public function photos()
+    {
+        return $this->hasMany('App\Photo');
+    }
+
 }
