@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Contest;
+use App\Photo;
+use App\User;
 use Illuminate\Http\Request;
 
 class ContestController extends Controller
@@ -37,5 +40,33 @@ class ContestController extends Controller
         return view('pages.contest.photo')
             ->with('request',$request)
             ->with('photo', $photo);
+    }
+
+    public function testovaci(Request $request)
+    {
+        if ($request->id==='1'){
+
+            $user=User::firstOrFail();
+
+
+            return $user->delete();
+        }
+
+        if ($request->id==='2'){
+
+            $photo=Photo::FirstOrFail();
+            $contest=Contest::FirstOrFail();
+            $contest->photos()->detach($photo);
+            return 'detech done';
+        }
+
+        if ($request->id==='3'){
+
+
+            $contest=Contest::FirstOrFail();
+            $contest->delete();
+            return 'delete done';
+        }
+
     }
 }
