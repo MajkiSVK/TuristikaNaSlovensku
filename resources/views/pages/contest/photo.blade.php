@@ -12,14 +12,14 @@
         <div class="carousel-inner">
 
             <div class="carousel-item active">
-                <img class="d-block max-width-100 max-height-90" src="https://localhost/turistika/{{$photo->resized_path}}" alt="First slide">
+                <img class="d-block max-width-100 max-height-90 mt-3" src="https://localhost/turistika/{{$photo->resized_path}}" alt="First slide">
             </div>
         </div>
-        <a class="carousel-control-prev" href="{{$prev_id}}" role="button" data-slide="prev">
+        <a class="carousel-control-prev bg-dark" href="{{$prev_id}}" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="{{$next_id}}" role="button" data-slide="next">
+        <a class="carousel-control-next bg-dark" href="{{$next_id}}" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
