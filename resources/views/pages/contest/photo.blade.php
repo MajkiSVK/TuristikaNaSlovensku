@@ -6,7 +6,7 @@
 
 
 @section('container')
-<div id="photo_body" class="vh-100">
+<div id="photo_body" class="min-vh-100">
 
 <center>
     <a href="{{URL::to(route('home'))}}/{{Request::segment(1)}}/gallery"> <span class="btn-secondary rounded float-right p-1 mt-3">X</span></a>
