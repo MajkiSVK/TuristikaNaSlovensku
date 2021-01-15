@@ -17,7 +17,7 @@ class CreateContestsTable extends Migration
             $table->id();
             $table->string('name',200)->unique();
             $table->string('slug',400);
-            $table->integer('photo_limit')->unique()->default('1');
+            $table->integer('photo_limit')->default('1');
             $table->dateTime('start_upload');
             $table->dateTime('stop_upload');
             $table->dateTime('start_vote');
