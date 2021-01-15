@@ -31,7 +31,7 @@
 </center>
     <div id="photo_header" class="row justify-content-between">
         <span class="col-8 text-break"><small><u>Autor: </u></small><b>{{$photo->user->name}}</b></span>
-        <div class="col-4 text-right"> <span class="btn btn-success">Lajk 1000</span></div>
+        <div class="col-4 text-right"> <a href="{{URL::to(route('home'))}}/like/@if(empty($like))add/{{Request::segment(1)}}/{{$photo->id}}@elseif($like)delete/{{Request::segment(1)}}/{{$photo->id}} @endif"> <span class="btn btn-success">Lajk {{$like_number}}</span></a></div>
     </div>
 </div>
 
