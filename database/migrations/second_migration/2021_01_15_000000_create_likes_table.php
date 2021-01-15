@@ -14,6 +14,7 @@ class CreateLikesTable extends Migration
     public function up()
     {
         Schema::create('likes', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('facebook_id');
             $table->foreign('facebook_id')->references('facebook_id')->on('users')->onDelete('cascade');
             $table->string('URL',500);
