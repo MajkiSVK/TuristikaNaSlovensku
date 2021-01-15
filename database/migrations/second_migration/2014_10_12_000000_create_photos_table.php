@@ -15,7 +15,10 @@ class CreatePhotosTable extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('contest_id');
+            $table->foreign('contest_id')->references('id')->on('contests')->onDelete('cascade');
             $table->string('original_path',500);
             $table->string('resized_path',500);
             $table->timestamps();
