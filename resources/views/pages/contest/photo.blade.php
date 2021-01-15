@@ -7,10 +7,11 @@
 
 @section('container')
 <div id="photo_body" class="vh-100">
+
 <center>
+    <a href="{{URL::to(route('home'))}}/{{Request::segment(1)}}/gallery"> <span class="btn-secondary rounded float-right p-1 mt-3">X</span></a>
     <div id="carouselExampleControls" class="carousel w-90" >
         <div class="carousel-inner">
-
             <div class="carousel-item active">
                 <img class="d-block max-width-100 max-height-90 mt-3" src="https://localhost/turistika/{{$photo->resized_path}}" alt="First slide">
             </div>
