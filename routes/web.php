@@ -24,4 +24,4 @@ Route::get('/facebook/callback', 'FacebookController@callback')->name('FbCallbac
 Route::get('/facebook/logout', 'FacebookController@logout')->name('FbLogout')->middleware('FbAuth');
 
 Route::get('{contest}/gallery', 'ContestController@gallery')->name('contest_gallery');
-Route::get('{contest}/photo/{photo_id}', 'ContestController@photo')->name('contest_gallery');
+Route::get('{contest}/gallery/photo/{photo_id}', 'ContestController@photo')->name('contest_gallery');
