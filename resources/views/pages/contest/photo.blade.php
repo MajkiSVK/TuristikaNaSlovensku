@@ -12,7 +12,7 @@
         <div class="carousel-inner">
 
             <div class="carousel-item active">
-                <img class="d-block w-100" src="https://localhost/turistika/{{$photo->resized_path}}" alt="First slide">
+                <img class="d-block max-width-100 max-height-90" src="https://localhost/turistika/{{$photo->resized_path}}" alt="First slide">
             </div>
         </div>
         <a class="carousel-control-prev" href="{{$prev_id}}" role="button" data-slide="prev">
