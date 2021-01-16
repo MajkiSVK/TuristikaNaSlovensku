@@ -2,25 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Contest;
 use App\Like;
-use App\Photo;
 use App\Repository\ContestRepository;
+use App\Repository\LikeRepository;
+use App\Services\LikeService;
 use App\Services\PhotoService;
-use App\User;
 use Illuminate\Http\Request;
 
 class ContestController extends Controller
 {
     private $contestRepository;
     private $photoService;
+    private $likeRepository;
+
 
     public function __construct(ContestRepository $contestRepository,
-                                PhotoService $photoService)
+                                PhotoService $photoService,
+                                LikeRepository $likeRepository)
     {
 
         $this->contestRepository = $contestRepository;
         $this->photoService = $photoService;
+
+        $this->likeRepository = $likeRepository;
     }
     /*
      * Show gallery page
@@ -46,8 +50,10 @@ class ContestController extends Controller
         $url=$request->contest.'/'.$photo->id;
 
         /*Check if a user already voted for this photo*/
-        $like=Like::where('facebook_id',session()->get('facebook_id'))->where('URL', $url)->first();
-        $like_number=Like::where('URL', $url)->count();
+        $like=$this->likeRepository->checkLike(session()->get('facebook_id'),$url);
+
+        /*Like counter for specific URL*/
+        $like_number=$this->likeRepository->likeCounter($url);
 
         return view('pages.contest.photo')
             ->with('photo', $photo)
