@@ -13,7 +13,7 @@
     <div id="carouselExampleControls" class="carousel w-90" >
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block max-width-100 max-height-90 mt-3" src="https://localhost/turistika/{{$photo->resized_path}}" alt="First slide">
+                <img class="d-block max-width-100 max-height-90 mt-3" src="{{URL::asset($photo->resized_path)}}" alt="First slide">
             </div>
         </div>
         {{--If the previous image is existing--}}
