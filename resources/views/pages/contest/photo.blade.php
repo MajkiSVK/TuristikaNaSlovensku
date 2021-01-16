@@ -17,16 +17,16 @@
             </div>
         </div>
         {{--If the previous image is existing--}}
-        @if($prev_id)
-            <a class="carousel-control-prev bg-dark" href="{{$prev_id}}" role="button" data-slide="prev">
+        @if($photo->prev)
+            <a class="carousel-control-prev bg-dark" href="{{$photo->prev}}" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
         @endif
 
         {{--If the next image is existing--}}
-        @if($next_id)
-            <a class="carousel-control-next bg-dark" href="{{$next_id}}" role="button" data-slide="next">
+        @if($photo->next)
+            <a class="carousel-control-next bg-dark" href="{{$photo->next}}" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>

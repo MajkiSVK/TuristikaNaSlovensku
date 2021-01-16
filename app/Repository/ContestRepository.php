@@ -15,4 +15,9 @@ class ContestRepository
     {
         return Contest::where('slug', $contest)->firstOrFail();
    }
+
+    public function getBySlug($request)
+    {
+        return Contest::where('slug', $request->contest)->FirstOrFail();
+   }
 }
