@@ -6,7 +6,7 @@ use App\Repository\ContestRepository;
 use App\Repository\LikeRepository;
 use App\Services\PhotoService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 
 
 class ContestController extends Controller
@@ -91,10 +91,21 @@ class ContestController extends Controller
                     'photo'=>'mimes:jpg,jpeg,png'
                 ]);
 
-                /*defined upload path*/
+                /*defined upload and thumbnail paths*/
                 $path='storage/contest/'.$request->contest;
+                $path_thumb=$path.'/thumb';
+                if (!file_exists($path_thumb)){
+                    mkdir($path_thumb);
+                }
 
-                $request->photo->store($path);
+                $photo=$request->photo->store($path);
+                $resized=Image::make($photo);
+                $resized->resize(300, 150, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+
+                $resized->save($path.'/thumb/'.$resized->basename);
 
                 return back()->with('success','Súbor úspešne nahraný!');
             }
