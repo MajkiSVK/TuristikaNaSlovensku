@@ -25,7 +25,10 @@ Route::get('/facebook/logout', 'FacebookController@logout')->name('FbLogout')->m
 
 Route::get('{contest}/gallery', 'ContestController@gallery')->name('contest_gallery');
 Route::get('{contest}/gallery/photo/{photo_id}', 'ContestController@photo')->name('contest_gallery');
+Route::get('{contest}/gallery/upload/', 'ContestController@upload_page')->name('upload_page')->middleware('FbAuth');
+Route::post('{contest}/gallery/upload/confirm', 'ContestController@upload_process')->name('upload_page')->middleware('FbAuth');
 
 Route::get('/like/add/{slug}/{photo_id}', 'LikeController@add_like')->name('like_add');
 Route::get('/like/delete/{slug}/{photo_id}', 'LikeController@delete_like')->name('like_delete');
+
 

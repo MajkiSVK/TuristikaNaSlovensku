@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Like;
 use App\Repository\ContestRepository;
 use App\Repository\LikeRepository;
-use App\Services\LikeService;
 use App\Services\PhotoService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+
 
 class ContestController extends Controller
 {
@@ -60,4 +60,45 @@ class ContestController extends Controller
             ->with('like', $like)
             ->with('like_number', $like_number);
     }
+
+    /*
+     * Show upload page
+     */
+    public function upload_page(Request $request)
+    {
+        $contest=$this->contestRepository->getBySlug($request);
+        return view('pages.contest.upload')
+            ->with('contest', $contest);
+    }
+
+    /*
+     * Upload processing
+     */
+    public function upload_process(Request $request)
+    {
+        /*Check if file is uploaded*/
+        if ($request->hasFile('photo')){
+
+            /*check if description is written*/
+            if (empty($request->description)){
+                return back()->with('error','Nezadal si žiadny popis fotky!');
+            }
+
+            /*check if file is valid*/
+            if ($request->file('photo')->isValid()){
+                $validated=$request->validate([
+                    'description'=>'string|max:100',
+                    'photo'=>'mimes:jpg,jpeg,png'
+                ]);
+
+                /*defined upload path*/
+                $path='storage/contest/'.$request->contest;
+
+                $request->photo->store($path);
+
+                return back()->with('success','Súbor úspešne nahraný!');
+            }
+        }else{
+                return back()->with('error','Nenahral si žiadny súbor!');}
+            }
 }
