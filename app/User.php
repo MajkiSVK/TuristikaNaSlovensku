@@ -28,4 +28,14 @@ class User extends Authenticatable
         'facebook_id',
     ];
 
+    public function photos()
+    {
+        return $this->hasMany('App\Photo');
+    }
+
+    public function likes()
+    {
+        $this->hasMany('App\Like');
+    }
+
 }
