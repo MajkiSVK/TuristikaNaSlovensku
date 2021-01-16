@@ -26,7 +26,7 @@ contest_gallery
 
 <div id="gallery_body" class="row ">
     @forelse($images as $image)
-        <div class="col-12 col-md-3 mb-2 img-thumbnail gallery_img_div "><img src="https://localhost/turistika/{{$image}}" class="gallery_img"></div>
+        <div class="col-12 col-md-3 mb-2 img-thumbnail gallery_img_div text-center "><img src="https://localhost/turistika/{{$image}}" class="gallery_img"></div>
         @empty Nič tu niejeeeeeee
 
     @endforelse
