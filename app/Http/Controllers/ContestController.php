@@ -5,27 +5,29 @@ namespace App\Http\Controllers;
 use App\Contest;
 use App\Like;
 use App\Photo;
+use App\Repository\ContestRepository;
 use App\User;
 use Illuminate\Http\Request;
 
 class ContestController extends Controller
 {
+    private $contestRepository;
+
+    public function __construct(ContestRepository $contestRepository)
+    {
+
+        $this->contestRepository = $contestRepository;
+    }
     /*
      * Show gallery page
      */
     public function gallery(Request $request)
     {
-        $images=['0'=>'public/storage/contest/test_image.jpg',
-                 '1'=>'public/storage/contest/test_image2.jpg',
-                 '2'=>'public/storage/contest/test_image2.jpg',
-                 '3'=>'public/storage/contest/test_image.jpg',
-                 '4'=>'public/storage/contest/test_image2.jpg',
-                 '5'=>'public/storage/contest/test_image3.jpg',
-                 '6'=>'public/storage/contest/test_image.jpg',
-                 '7'=>'public/storage/contest/test_image2.jpg'];
+        /*Get contest details*/
+        $contest=$this->contestRepository->galleryFirstOrFail($request->contest);
+
         return view('pages.contest.gallery')
-                ->with('images',$images)
-                ->with('name', $request->contest);
+                ->with('contest', $contest);
     }
 
     /*
