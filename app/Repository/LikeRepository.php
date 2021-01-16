@@ -26,4 +26,14 @@ class LikeRepository
         $new_like->URL=$url;
        return $new_like->save();
     }
+
+    /*
+     * Delete like for photo, if a user voted (else error 404)
+     */
+    public function delete_like($facebook_id,$url)
+    {
+        $like=Like::where('facebook_id', $facebook_id)->where('URL', $url)->firstOrFail();
+        $like->delete();
+        return back();
+    }
 }

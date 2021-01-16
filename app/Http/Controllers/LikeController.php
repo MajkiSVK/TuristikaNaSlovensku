@@ -39,8 +39,7 @@ class LikeController extends Controller
     {
         $facebook_id=session()->get('facebook_id');
         $url=$request->slug.'/'.$request->photo_id;
-        $like=Like::where('facebook_id', $facebook_id)->where('URL', $url)->firstOrFail();
-        $like->delete();
-        return back();
+
+        return $this->likeRepository->delete_like($facebook_id,$url);
     }
 }
