@@ -3,36 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Like;
+use App\Repository\LikeRepository;
+use App\Services\LikeService;
 use Illuminate\Http\Request;
 
 class LikeController extends Controller
 {
+
+    private $likeRepository;
+    private $likeService;
+
+    public function __construct(LikeRepository $likeRepository,
+                                LikeService $likeService)
+    {
+        $this->likeRepository = $likeRepository;
+        $this->likeService = $likeService;
+    }
+
     /*
-     * Add like for photos
+     * Add like for photo, if user is logged in and not voted yet.
      */
     public function add_like(Request $request)
     {
         $facebook_id=session()->get('facebook_id');
         /* Make unique "URL" key */
         $url=$request->slug.'/'.$request->photo_id;
-        /*Check if a user already voted for this photo*/
-        $check_like=Like::where('facebook_id',$facebook_id)->where('URL', $url)->first();
 
-        if (!empty($check_like)){
-           return back()->with('error','Za túto fotku už si hlasoval! Nemôžeš hlasovať viac krát');
-        }
 
-        if ($facebook_id){
-            $new_like=new Like();
-            $new_like->facebook_id=$facebook_id;
-            $new_like->URL=$url;
-            $new_like->save();
-            return back();
-        }else{
-            return back()->with('error','Pre hlasovanie sa musíš prihlásiť');
-        }
+        return $this->likeService->add_like($facebook_id,$url);
     }
-
     /*
      * Delete like for specific photo
      */
