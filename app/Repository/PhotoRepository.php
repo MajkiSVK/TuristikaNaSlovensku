@@ -34,11 +34,12 @@ class PhotoRepository
     /*
      * Save the photo information
      */
-    public function Save($description,$user_id,$original_path,$resized_path,$thumb_path)
+    public function Save($description,$user_id,$contest_id,$original_path,$resized_path,$thumb_path)
     {
         $photo=new Photo();
         $photo->description = $description;
         $photo->user_id=$user_id;
+        $photo->contest_id=$contest_id;
         $photo->original_path=$original_path;
         $photo->resized_path=$resized_path;
         $photo->thumb_path=$thumb_path;
