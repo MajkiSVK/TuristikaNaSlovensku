@@ -8,8 +8,8 @@ contest_gallery
 @section('container')
 
 <div class="row justify-content-between ">
-    <div class="d-none d-md-block col-md-4 text-break mt-3"></div>
-   <div class=" col-12 col-md-4 text-center mt-2"> <a href="{{URL::to(route('home'))}}"><img src="{{asset('storage/tns.png')}}" class="w-100"> </a></div>
+    <div class="col-12 col-md-4 text-break mt-3"><a href="{{URL::current()}}/upload" class="btn btn-dark text-break">Nahrať fotku</a> </div>
+   <div class="col-12 col-md-4 text-center mt-2"> <a href="{{URL::to(route('home'))}}"><img src="{{asset('storage/tns.png')}}" class="w-100"> </a></div>
     {{--If the user is logged in, show the Logout button, else show the Login button--}}
     @if(session()->get('name'))
         <div class="col-12 col-md-4 text-right text-break mt-3"><b><a href="{{URL::to(route('home'))}}">{{session()->get('name')}}</a></b>
