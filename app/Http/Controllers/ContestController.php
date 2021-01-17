@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Repository\ContestRepository;
 use App\Repository\LikeRepository;
+use App\Repository\PhotoRepository;
+use App\Repository\UserRepository;
 use App\Services\PhotoService;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -14,17 +16,22 @@ class ContestController extends Controller
     private $contestRepository;
     private $photoService;
     private $likeRepository;
+    private $photoRepository;
+    private $userRepository;
 
 
     public function __construct(ContestRepository $contestRepository,
                                 PhotoService $photoService,
-                                LikeRepository $likeRepository)
+                                LikeRepository $likeRepository,
+                                PhotoRepository $photoRepository,
+                                UserRepository $userRepository)
     {
 
         $this->contestRepository = $contestRepository;
         $this->photoService = $photoService;
-
         $this->likeRepository = $likeRepository;
+        $this->photoRepository = $photoRepository;
+        $this->userRepository = $userRepository;
     }
     /*
      * Show gallery page
@@ -91,22 +98,60 @@ class ContestController extends Controller
                     'photo'=>'mimes:jpg,jpeg,png'
                 ]);
 
-                /*defined upload and thumbnail paths*/
+                /*defined upload, web and thumbnail paths*/
                 $path='storage/contest/'.$request->contest;
                 $path_thumb=$path.'/thumb';
+                $path_web=$path.'/web';
+
+                /*Get contest details*/
+                $contest=$this->contestRepository->galleryFirstOrFail($request->contest);
+
+                /*Get user details*/
+                $user=$this->userRepository->FirstOrFail(session()->get('facebook_id'));
+
+                /*Get saved photo*/
+                $photo=$request->photo->store($path);
+
+                /*Check if thumb directory exist*/
                 if (!file_exists($path_thumb)){
                     mkdir($path_thumb);
                 }
 
-                $photo=$request->photo->store($path);
+                /*Check if web directory exist*/
+                if (!file_exists($path_web)){
+                    mkdir($path_web);
+                }
+                /*Get uploaded photo*/
                 $resized=Image::make($photo);
+
+                /*Define max sizes for web*/
+                $width=1920;
+                $height=1080;
+
+                /*Compare actual size with defined*/
+                if ($resized->width() < $width ) {$width=null;}
+                if ($resized->height() < $height ) {$height=null;}
+
+                /*If height or width is defined*/
+                if($width || $height){
+                    /*Resize and save for showing on the web*/
+                    $resized->resize($width, $height, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+                }
+                $resized->save($path.'/web/'.$resized->basename);
+
+                /*resize and save for thumb*/
                 $resized->resize(300, 150, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
-
                 $resized->save($path.'/thumb/'.$resized->basename);
 
+                $path_web=$path_web.'/'.$resized->basename;
+                $path_thumb=$path_thumb.'/'.$resized->basename;
+                $this->photoRepository->Save($request->description,$user['id'],$contest->id,$photo,$path_web,$path_thumb);
                 return back()->with('success','Súbor úspešne nahraný!');
             }
         }else{
