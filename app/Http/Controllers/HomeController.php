@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repository\ContestRepository;
 use App\Repository\UserRepository;
 use Illuminate\Http\Request;
 
@@ -9,10 +10,13 @@ class HomeController extends Controller
 {
 
     private $userRepository;
+    private $contestRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository,
+                                ContestRepository $contestRepository)
     {
         $this->userRepository = $userRepository;
+        $this->contestRepository = $contestRepository;
     }
 
     /*
@@ -21,8 +25,10 @@ class HomeController extends Controller
     public function main()
     {
         $user=$this->userRepository->FirstOrFail(session()->get('facebook_id'));
+        $contests= $this->contestRepository->getAllActiveContests();
         return view('pages.home')
-                    ->with('user', $user);
+                    ->with('user', $user)
+                    ->with('active_contests', $contests);
     }
 
     /*
