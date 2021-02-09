@@ -31,7 +31,7 @@ home
 
                 {{--contact mail input (custom mail for contact--}}
                 <label for="contact_mail" class="col-3 text-right mb-3"><b>Kontaktný E-mail</b></label>
-                <input name="contact_mail" type="email" class="col-5 mb-3" value="{{$user['email']}}">
+                <input name="contact_mail" type="email" class="col-5 mb-3" value="{{$user->settings()->where('type', 'contact_mail')->first()->value ?? ''}}">
 
                 <div id="empty" class="col-12 text-center"><i>Telefónne číslo zadávajte bez znaku <b>+</b> . Napríklad 421 900 000 000, alebo 420 000 000 000 </i></div>
 
