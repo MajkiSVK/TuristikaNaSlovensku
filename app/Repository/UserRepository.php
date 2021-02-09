@@ -68,6 +68,7 @@ class UserRepository
         $user= User::WHERE('facebook_id', $facebook_id)->firstOrFail();
         $user->phone_number=NULL;
         $user->save();
+        $user->settings()->where('type', 'contact_mail')->delete();
         return back()->with('success', 'Tvoje údaje boli úspešne vymazané');
     }
 
