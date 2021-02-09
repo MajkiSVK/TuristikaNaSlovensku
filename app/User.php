@@ -38,4 +38,9 @@ class User extends Authenticatable
         $this->hasMany('App\Like');
     }
 
+    public function settings()
+    {
+        $this->hasMany('App\UserSetting');
+    }
+
 }
