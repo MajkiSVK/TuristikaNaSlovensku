@@ -28,7 +28,7 @@ contest_gallery
 <div id="gallery_body" class="row ">
     @forelse($contest->photos as $photo)
         <div class="col-12 col-md-3 mb-2 img-thumbnail gallery_img_div text-center ">
-            <a href="{{URL::current()}}/photo/{{$photo->id}}"> <img src="{{URL::asset($photo->resized_path)}}" class="gallery_img"></a>
+            <a href="{{URL::current()}}/photo/{{$photo->id}}"> <img src="{{URL::asset($photo->thumb_path)}}" class="gallery_img"></a>
         </div>
         @empty Nič tu niejeeeeeee
 
