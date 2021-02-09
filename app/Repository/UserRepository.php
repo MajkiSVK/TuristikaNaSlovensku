@@ -5,6 +5,7 @@ namespace App\Repository;
 
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
 
 class UserRepository
@@ -39,9 +40,21 @@ class UserRepository
         if(empty($request->user_phone)){
             return back()->with('error','Telefónne číslo nesmie ostať prázdne');
         }
+
+        if(empty($request->contact_mail)){
+            return back()->with('error','Kontaktný E-mail nesmie ostať prázdny');
+        }
         $user= User::WHERE('facebook_id', $facebook_id)->firstOrFail();
         $user->phone_number=$request->user_phone;
         $user->save();
+        $user->settings()->updateOrCreate(
+            ['type' => 'contact_mail'],
+            ['value'=> $request->contact_mail,
+             'type'=> 'contact_mail',
+             'expiration' => Carbon::now()
+            ]
+        );
+
 
         return back()->with('success', 'Tvoje údaje boli úspešne uložené');
 
