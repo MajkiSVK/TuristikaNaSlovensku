@@ -29,7 +29,7 @@ class UserRepository
      */
     public function FirstOrFail($facebook_id)
     {
-        return User::WHERE('facebook_id', $facebook_id)->firstOrFail()->toArray();
+        return User::WHERE('facebook_id', $facebook_id)->firstOrFail();
     }
 
     /*
