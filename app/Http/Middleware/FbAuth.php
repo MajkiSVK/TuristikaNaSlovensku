@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Illuminate\Support\Facades\Session;
 
 
 class FbAuth
@@ -17,10 +17,10 @@ class FbAuth
      */
     public function handle($request, Closure $next)
     {
-        if(!session()->get('user_token')){
-            return redirect(route('FbLogin'));
+        if(Session::get('user')){
+            return $next($request);
         }else{
-        return $next($request);
+            return redirect(route('FbLogin'));
         }
     }
 }
