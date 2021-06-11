@@ -21,6 +21,7 @@ class FbAuth
      * @param  \Closure  $next
      * @return mixed
      */
+
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
@@ -30,8 +31,7 @@ class FbAuth
     {
         if($this->userService->getFacebookId() !== 0 ){
             return $next($request);
-        }else{
-            return redirect(route('FbLogin'));
         }
+            return redirect(route('FbLogin'));
     }
 }
