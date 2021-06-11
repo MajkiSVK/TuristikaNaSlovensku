@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repository\UserRepository;
 use App\Services\FacebookService;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
@@ -14,11 +15,18 @@ class FacebookController extends Controller
 {
 
 
+    /**
+     * @var UserService
+     */
+    private $userService;
+
     public function __construct(FacebookService $facebookService,
-                                UserRepository $userRepository)
+                                UserRepository $userRepository,
+                                UserService $userService)
     {
         $this->FacebookService=$facebookService;
         $this->UserRepository=$userRepository;
+        $this->userService = $userService;
     }
 
     /*
@@ -37,7 +45,7 @@ class FacebookController extends Controller
         /*
          * If the user is logged in, redirect to the previous URL
          */
-        if (Session::get('user')){
+        if ($this->userService->getFacebookId()){
             return Redirect::to(Session::get('previous_url'))->with('error','Už si prihlásený, takže sa nemôžeš znova prihlásiť!');
         }
 

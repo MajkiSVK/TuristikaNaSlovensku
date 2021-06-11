@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repository\ContestRepository;
 use App\Repository\UserRepository;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -12,12 +13,18 @@ class HomeController extends Controller
 
     private $userRepository;
     private $contestRepository;
+    /**
+     * @var UserService
+     */
+    private $userService;
 
     public function __construct(UserRepository $userRepository,
-                                ContestRepository $contestRepository)
+                                ContestRepository $contestRepository,
+                                UserService $userService)
     {
         $this->userRepository = $userRepository;
         $this->contestRepository = $contestRepository;
+        $this->userService = $userService;
     }
 
     /*
@@ -25,7 +32,7 @@ class HomeController extends Controller
      */
     public function main()
     {
-        $user=$this->userRepository->FirstOrFail(Session::get('user')->facebook_id);
+        $user=$this->userRepository->FirstOrFail($this->userService->getFacebookId());
         $contests= $this->contestRepository->getAllActiveContests();
         return view('pages.home')
                     ->with('user', $user)
@@ -37,7 +44,7 @@ class HomeController extends Controller
      */
     public function save(Request $request)
     {
-        $save=$this->userRepository->saveUserContact(Session::get('user')->facebook_id,$request);
+        $save=$this->userRepository->saveUserContact($this->userService->getFacebookId(),$request);
         return $save;
     }
 
@@ -46,7 +53,7 @@ class HomeController extends Controller
      */
     public function delete_contact()
     {
-        $delete=$this->userRepository->RemoveUserContact(Session::get('user')->facebook_id);
+        $delete=$this->userRepository->RemoveUserContact($this->userService->getFacebookId());
         return $delete;
     }
 
@@ -55,7 +62,7 @@ class HomeController extends Controller
      */
     public function delete_profile()
     {
-        $delete_profile=$this->userRepository->DeleteUserProfile(Session::get('user')->facebook_id);
+        $delete_profile=$this->userRepository->DeleteUserProfile($this->userService->getFacebookId());
         Session::forget(['user']);
         return $delete_profile;
     }

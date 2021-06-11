@@ -58,7 +58,7 @@ class ContestController extends Controller
         $url=$request->contest.'/'.$photo->id;
 
         /*Check if a user already voted for this photo*/
-        $like=$this->likeRepository->checkLike(Session::get('user')->facebook_id,$url);
+        $like=$this->likeRepository->checkLike($this->userService->getFacebookId(),$url);
 
         /*Like counter for specific URL*/
         $like_number=$this->likeRepository->likeCounter($url);
