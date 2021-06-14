@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Repository\ContestRepository;
 use App\Repository\UserRepository;
 use App\Services\UserService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
@@ -37,7 +39,7 @@ class HomeController extends Controller
     /*
      * Show the main page with user profile informations
      */
-    public function main()
+    public function main(): View
     {
         $user=$this->userRepository->GetUserByFacebookId($this->userService->getFacebookId());
         $contests= $this->contestRepository->getAllActiveContests();
@@ -49,7 +51,7 @@ class HomeController extends Controller
     /*
      * Save user information
      */
-    public function save(Request $request)
+    public function save(Request $request): RedirectResponse
     {
         $save=$this->userRepository->saveUserContact($this->userService->getFacebookId(),$request);
         return $save;
@@ -58,7 +60,7 @@ class HomeController extends Controller
     /*
      *Delete user contact informations
      */
-    public function delete_contact()
+    public function delete_contact(): RedirectResponse
     {
         $delete=$this->userRepository->RemoveUserContact($this->userService->getFacebookId());
         return $delete;
@@ -67,7 +69,7 @@ class HomeController extends Controller
     /*
      * Delete user profile
      */
-    public function delete_profile()
+    public function delete_profile(): RedirectResponse
     {
         $delete_profile=$this->userRepository->DeleteUserProfile($this->userService->getFacebookId());
         Session::forget(['user']);
