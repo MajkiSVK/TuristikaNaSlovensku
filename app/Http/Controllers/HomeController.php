@@ -66,8 +66,7 @@ class HomeController extends Controller
      */
     public function delete_contact(): RedirectResponse
     {
-        $delete=$this->userRepository->RemoveUserContact($this->userService->getFacebookId());
-        return $delete;
+        return $this->userRepository->RemoveUserContact($this->userService->getFacebookId());
     }
 
     /**
@@ -76,8 +75,7 @@ class HomeController extends Controller
      */
     public function delete_profile(): RedirectResponse
     {
-        $delete_profile=$this->userRepository->DeleteUserProfile($this->userService->getFacebookId());
         Session::forget(['user']);
-        return $delete_profile;
+        return $this->userRepository->DeleteUserProfile($this->userService->getFacebookId());
     }
 }
