@@ -10,9 +10,16 @@ use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
-
+    /**
+     * @var UserRepository
+     */
     private $userRepository;
+
+    /**
+     * @var ContestRepository
+     */
     private $contestRepository;
+
     /**
      * @var UserService
      */
