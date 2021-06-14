@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveUserContactRequest;
 use App\Repository\ContestRepository;
 use App\Repository\UserRepository;
 use App\Services\UserService;
@@ -54,10 +55,12 @@ class HomeController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function save(Request $request): RedirectResponse
+    public function save(SaveUserContactRequest $request): RedirectResponse
     {
-        $save=$this->userRepository->saveUserContact($this->userService->getFacebookId(),$request);
-        return $save;
+
+        $this->userService->saveUserContactInformation($request);
+
+        return back()->with('success', 'Tvoje údaje boli úspešne uložené');
     }
 
     /**

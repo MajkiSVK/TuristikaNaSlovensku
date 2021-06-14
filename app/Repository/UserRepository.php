@@ -4,6 +4,7 @@
 namespace App\Repository;
 
 
+use App\Http\Requests\SaveUserContactRequest;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,29 +39,18 @@ class UserRepository
     }
 
     /**
-     * Save a user contact information
+     * Save a user phone number and return back user
+     * @param int $facebook_id
+     * @param SaveUserContactRequest $request
+     * @return User
      */
-    public function SaveUserContact(int $facebook_id,Request $request)
+    public function SaveUserPhoneNumber(int $facebook_id,SaveUserContactRequest $request): User
     {
-        if(empty($request->user_phone)){
-            return back()->with('error','Telefónne číslo nesmie ostať prázdne');
-        }
-
-        if(empty($request->contact_mail)){
-            return back()->with('error','Kontaktný E-mail nesmie ostať prázdny');
-        }
         $user= User::WHERE('facebook_id', $facebook_id)->firstOrFail();
         $user->phone_number=$request->user_phone;
         $user->save();
-        $user->settings()->updateOrCreate(
-            ['type' => 'contact_mail'],
-            ['value'=> $request->contact_mail,
-             'type'=> 'contact_mail',
-             'expiration' => Carbon::now()
-            ]
-        );
 
-        return back()->with('success', 'Tvoje údaje boli úspešne uložené');
+        return $user;
     }
 
     /**
