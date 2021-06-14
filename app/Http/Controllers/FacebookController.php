@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repository\UserRepository;
 use App\Services\FacebookService;
 use App\Services\UserService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
@@ -37,27 +38,21 @@ class FacebookController extends Controller
     }
 
     /*
-     * Login screen for facebook
+     * Login screen for facebook, making previous URL for redirection
      */
     public function login()
     {
-        /*
-         * Make session for URL, where will be redirected user after facebook callback
-         */
         if (URL::previous()===URL::route('FbLogin')){
             Session::put('previous_url', URL::route('home'));
         }else{
             Session::put('previous_url', URL::previous());
         }
-        /*
-         * If the user is logged in, redirect to the previous URL
-         */
+
         if ($this->userService->getFacebookId()){
             return Redirect::to(Session::get('previous_url'))->with('error','Už si prihlásený, takže sa nemôžeš znova prihlásiť!');
         }
 
         return view('pages.fb_login');
-
     }
 
     /*
@@ -68,29 +63,25 @@ class FacebookController extends Controller
         return Socialite::driver('facebook')
             ->scopes('groups_access_member_info')
             ->redirect();
-
     }
 
-    public function callback()
+    /*
+     * Get user informations from facebook, update/create user in database and log in him with redirection to previous URL
+     */
+    public function callback(): RedirectResponse
     {
-        /*
-         * Get user informations from facebook and update/create user in database
-         */
         $user = Socialite::driver('facebook')->user();
         $userToLogIn=$this->UserRepository->UpdateOrCreate($user);
 
-        /*
-         * Save user token and name to session
-         */
         Session::put('user', $userToLogIn);
 
-        /*
-         * Redirect to url "before" Login screen
-         */
         return Redirect::to(Session::get('previous_url'))->with('success', 'Bol si úspešne prihlásený ako '.$user->Getname());
     }
 
-    public function logout()
+    /*
+     * Log out user
+     */
+    public function logout(): RedirectResponse
     {
         Session::forget(['user']);
         return Redirect::to(route('FbLogin'))->with('success','Bol si úspešne odhlásený');
