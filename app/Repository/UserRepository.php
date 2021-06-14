@@ -24,10 +24,12 @@ class UserRepository
         return User::updateOrCreate($id,$table);
     }
 
-    /*
+    /**
      * Find user by facebook_id
+     * @param int $facebook_id
+     * @return User
      */
-    public function FirstOrFail($facebook_id)
+    public function GetUserByFacebookId(int $facebook_id)
     {
         return User::WHERE('facebook_id', $facebook_id)->firstOrFail();
     }
