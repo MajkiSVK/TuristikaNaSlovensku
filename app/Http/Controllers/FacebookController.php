@@ -10,15 +10,22 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Laravel\Socialite\Facades\Socialite;
 
-
 class FacebookController extends Controller
 {
-
+    /**
+     * @var FacebookService
+     */
+    private $FacebookService;
 
     /**
      * @var UserService
      */
     private $userService;
+
+    /**
+     * @var UserRepository
+     */
+    private $UserRepository;
 
     public function __construct(FacebookService $facebookService,
                                 UserRepository $userRepository,
