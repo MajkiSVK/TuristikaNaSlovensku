@@ -36,8 +36,9 @@ class HomeController extends Controller
         $this->userService = $userService;
     }
 
-    /*
+    /**
      * Show the main page with user profile informations
+     * @return View
      */
     public function main(): View
     {
@@ -48,8 +49,10 @@ class HomeController extends Controller
                     ->with('active_contests', $contests);
     }
 
-    /*
+    /**
      * Save user information
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function save(Request $request): RedirectResponse
     {
@@ -57,8 +60,9 @@ class HomeController extends Controller
         return $save;
     }
 
-    /*
-     *Delete user contact informations
+    /**
+     *Delete user contact informations from database
+     * @return RedirectResponse
      */
     public function delete_contact(): RedirectResponse
     {
@@ -66,8 +70,9 @@ class HomeController extends Controller
         return $delete;
     }
 
-    /*
-     * Delete user profile
+    /**
+     * Delete user profile from database
+     * @return RedirectResponse
      */
     public function delete_profile(): RedirectResponse
     {
