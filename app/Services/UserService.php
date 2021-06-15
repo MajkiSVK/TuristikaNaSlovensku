@@ -51,13 +51,13 @@ class UserService
     public function saveUserContactInformation(SaveUserContactRequest $request): Model
     {
         $user=$this->userRepository->saveUserPhoneNumber($this->getFacebookId(),$request);
+
         return $user->settings()->updateOrCreate(
             ['type' => 'contact_mail'],
             ['value'=> $request->contact_mail,
              'type'=> 'contact_mail',
              'expiration' => Carbon::now()
             ]);
-
     }
 
     /**
