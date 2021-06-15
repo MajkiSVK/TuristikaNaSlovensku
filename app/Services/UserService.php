@@ -25,7 +25,7 @@ class UserService
      * Get User information from session
      * @return User
      */
-    public function getLoggedInUserObject(): User
+    public function getLoggedInUserData(): User
     {
         if(!Session::get('user')){
             return new User();
@@ -40,7 +40,7 @@ class UserService
      */
     public function getFacebookId(): int
     {
-        return $this->getLoggedInUserObject()->facebook_id ?? 0 ;
+        return $this->getLoggedInUserData()->facebook_id ?? 0 ;
     }
 
     /**
