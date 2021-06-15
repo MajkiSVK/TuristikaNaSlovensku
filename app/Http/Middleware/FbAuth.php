@@ -2,12 +2,18 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\UserService;
 use Closure;
-
+use Illuminate\Support\Facades\Session;
 
 
 class FbAuth
 {
+    /**
+     * @var UserService
+     */
+    private $userService;
+
     /**
      * Handle an incoming request.
      *
@@ -15,12 +21,17 @@ class FbAuth
      * @param  \Closure  $next
      * @return mixed
      */
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function handle($request, Closure $next)
     {
-        if(!session()->get('user_token')){
-            return redirect(route('FbLogin'));
-        }else{
-        return $next($request);
+        if($this->userService->getFacebookId() !== 0 ){
+            return $next($request);
         }
+            return redirect(route('FbLogin'));
     }
 }

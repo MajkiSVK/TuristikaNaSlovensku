@@ -6,6 +6,7 @@ use App\Like;
 use App\Repository\LikeRepository;
 use App\Services\LikeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class LikeController extends Controller
 {
@@ -25,7 +26,7 @@ class LikeController extends Controller
      */
     public function add_like(Request $request)
     {
-        $facebook_id=session()->get('facebook_id');
+        $facebook_id=$this->userService->getFacebookId();
         /* Make unique "URL" key */
         $url=$request->slug.'/'.$request->photo_id;
 
@@ -37,7 +38,7 @@ class LikeController extends Controller
      */
     public function delete_like(Request $request)
     {
-        $facebook_id=session()->get('facebook_id');
+        $facebook_id=$this->userService->getFacebookId();
         $url=$request->slug.'/'.$request->photo_id;
 
         return $this->likeRepository->delete_like($facebook_id,$url);

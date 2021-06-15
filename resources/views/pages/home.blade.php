@@ -31,7 +31,7 @@ home
 
                 {{--contact mail input (custom mail for contact--}}
                 <label for="contact_mail" class="col-3 text-right mb-3"><b>Kontaktný E-mail</b></label>
-                <input name="contact_mail" type="email" class="col-5 mb-3" value="{{$user['email']}}">
+                <input name="contact_mail" type="email" class="col-5 mb-3" value="{{$user->settings()->where('type', 'contact_mail')->first()->value ?? ''}}">
 
                 <div id="empty" class="col-12 text-center"><i>Telefónne číslo zadávajte bez znaku <b>+</b> . Napríklad 421 900 000 000, alebo 420 000 000 000 </i></div>
 
@@ -51,6 +51,15 @@ home
             </form>
 
         </div>
+        <hr>
+
+        <h3>Prebiehajúce súťaže</h3>
+        @forelse($active_contests as $contest)
+            <a href="{{URL::current()}}/{{$contest->slug}}/gallery">{{$contest->name}}<br></a>
+
+            @empty
+
+        @endforelse
     </center>
 
 
@@ -64,7 +73,7 @@ home
             if(confirm("Naozaj chceš vymazať svoje kontaktné údaje? V prípade že si zapojený/á do súťaže a " +
                 "vyhráš, nebuemožné ťa kontaktovať a výhra prepadne ďalšiemu v poradí.")){
                 window.location.href="{{ URL::route('delete_contact') }}";
-            };
+            }
         }
 
         /*
@@ -74,7 +83,7 @@ home
             if(confirm("Naozaj chceš vymazať svoj profil? V prípade že si zapojený/á do súťaže, " +
                 "budeš z nej automaticky vyradený/á")){
                 window.location.href="{{ URL::route('delete_profile') }}";
-            };
+            }
         }
     </script>
 @stop
