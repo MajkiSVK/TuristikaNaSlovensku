@@ -3,18 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserSetting extends Model
 {
-    /*
+    /**
      * Guarded column
      */
     protected $guarded = ['user_id'];
 
-    /*
-     * Relationship with user table
+    /**
+     * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo('App\User');
     }

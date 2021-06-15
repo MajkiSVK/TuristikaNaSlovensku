@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -27,17 +28,26 @@ class User extends Authenticatable
         'facebook_id',
     ];
 
-    public function photos()
+    /**
+     * @return HasMany
+     */
+    public function photos(): HasMany
     {
         return $this->hasMany('App\Photo');
     }
 
-    public function likes()
+    /**
+     * @return HasMany
+     */
+    public function likes(): HasMany
     {
         return $this->hasMany('App\Like');
     }
 
-    public function settings()
+    /**
+     * @return HasMany
+     */
+    public function settings(): HasMany
     {
         return $this->hasMany('App\UserSetting');
     }
