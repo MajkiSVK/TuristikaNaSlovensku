@@ -67,15 +67,15 @@ class UserRepository
         return $user;
     }
 
-    /*
+    /**
      * Delete a user profile from database
+     * @param $facebook_id
+     * @return bool
      */
-    public function DeleteUserProfile($facebook_id)
+    public function DeleteUserProfile($facebook_id): bool
     {
         $user= User::WHERE('facebook_id', $facebook_id)->firstOrFail();
-        $user->delete();
-
-        return Redirect::to(route('FbLogin'))->with('success','Tvoj profil bol úspešne vymazaný.');
+        return $user->delete();
     }
 
 }

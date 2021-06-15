@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
@@ -79,7 +80,8 @@ class HomeController extends Controller
      */
     public function delete_profile(): RedirectResponse
     {
+        $this->userService->deleteUserProfile();
         Session::forget(['user']);
-        return $this->userRepository->DeleteUserProfile($this->userService->getFacebookId());
+        return Redirect::to(route('FbLogin'))->with('success','Tvoj profil bol úspešne vymazaný.');
     }
 }

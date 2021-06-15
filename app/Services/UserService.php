@@ -70,4 +70,13 @@ class UserService
 
         return $user->settings()->where('type', 'contact_mail')->delete();
     }
+
+    /**
+     * Delete user profile from database
+     * @return bool
+     */
+    public function deleteUserProfile(): bool
+    {
+        return $this->userRepository->DeleteUserProfile($this->getFacebookId());
+    }
 }
