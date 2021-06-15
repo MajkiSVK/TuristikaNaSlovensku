@@ -1,14 +1,9 @@
 <?php
 
-
 namespace App\Repository;
-
 
 use App\Http\Requests\SaveUserContactRequest;
 use App\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class UserRepository
 {
