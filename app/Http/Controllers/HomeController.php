@@ -7,7 +7,6 @@ use App\Repository\ContestRepository;
 use App\Repository\UserRepository;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
@@ -53,7 +52,7 @@ class HomeController extends Controller
 
     /**
      * Save user information
-     * @param Request $request
+     * @param SaveUserContactRequest $request
      * @return RedirectResponse
      */
     public function save(SaveUserContactRequest $request): RedirectResponse
