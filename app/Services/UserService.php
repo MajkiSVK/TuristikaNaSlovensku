@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Services;
-
 
 use App\Http\Requests\SaveUserContactRequest;
 use App\Repository\UserRepository;
@@ -23,6 +21,10 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * Get User information from session
+     * @return User
+     */
     public function getLoggedInUserObject(): User
     {
         if(!Session::get('user')){
@@ -32,13 +34,17 @@ class UserService
         return Session::get('user');
     }
 
+    /**
+     * Get user facebook ID from session
+     * @return int
+     */
     public function getFacebookId(): int
     {
         return $this->getLoggedInUserObject()->facebook_id ?? 0 ;
     }
 
     /**
-     * Save user contact information
+     * Save user contact information for contests
      * @param SaveUserContactRequest $request
      * @return Model
      */
