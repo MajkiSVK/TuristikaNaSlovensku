@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function likes()
     {
-        $this->hasMany('App\Like');
+        return $this->hasMany('App\Like');
     }
 
     public function settings()
