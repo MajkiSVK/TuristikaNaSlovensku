@@ -54,16 +54,17 @@ class UserRepository
     }
 
     /**
-     * Remove a user contact information
+     * Remove a user phone number
+     * @param int $facebook_id
+     * @return User
      */
-    public function RemoveUserContact(int $facebook_id)
+    public function RemoveUserPhoneNumber(int $facebook_id): User
     {
         $user= User::WHERE('facebook_id', $facebook_id)->firstOrFail();
         $user->phone_number=NULL;
         $user->save();
-        $user->settings()->where('type', 'contact_mail')->delete();
 
-        return back()->with('success', 'Tvoje údaje boli úspešne vymazané');
+        return $user;
     }
 
     /*

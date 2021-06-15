@@ -69,7 +69,8 @@ class HomeController extends Controller
      */
     public function delete_contact(): RedirectResponse
     {
-        return $this->userRepository->RemoveUserContact($this->userService->getFacebookId());
+        $this->userService->removeUserContactInformation();
+        return back()->with('success', 'Tvoje údaje boli úspešne vymazané');
     }
 
     /**

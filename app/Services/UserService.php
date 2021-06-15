@@ -59,4 +59,15 @@ class UserService
             ]);
 
     }
+
+    /**
+     * Remove user contact information from database
+     * @return bool
+     */
+    public function removeUserContactInformation(): bool
+    {
+        $user=$this->userRepository->RemoveUserPhoneNumber($this->getFacebookId());
+
+        return $user->settings()->where('type', 'contact_mail')->delete();
+    }
 }
