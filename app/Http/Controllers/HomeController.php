@@ -58,7 +58,6 @@ class HomeController extends Controller
      */
     public function save(SaveUserContactRequest $request): RedirectResponse
     {
-
         $this->userService->saveUserContactInformation($request);
 
         return back()->with('success', 'Tvoje údaje boli úspešne uložené');
