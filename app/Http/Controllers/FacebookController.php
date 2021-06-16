@@ -42,11 +42,7 @@ class FacebookController extends Controller
      */
     public function login()
     {
-        if (URL::previous()===URL::route('FbLogin')){
-            Session::put('previous_url', URL::route('home'));
-        }else{
-            Session::put('previous_url', URL::previous());
-        }
+        $this->userService->generatePreviousURL();
 
         if ($this->userService->getFacebookId()){
             return Redirect::to(Session::get('previous_url'))->with('error','Už si prihlásený, takže sa nemôžeš znova prihlásiť!');
