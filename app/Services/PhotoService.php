@@ -50,21 +50,6 @@ class PhotoService
      */
     public function savePhoto($request)
     {
-        /*Check if file is uploaded*/
-        if ($request->hasFile('photo')){
-
-            /*check if description is written*/
-            if (empty($request->description)){
-                return back()->with('error','Nezadal si žiadny popis fotky!');
-            }
-
-            /*check if file is valid*/
-            if ($request->file('photo')->isValid()){
-                $request->validate([
-                    'description'=>'string|max:100',
-                    'photo'=>'mimes:jpg,jpeg,png'
-                ]);
-
                 /*defined upload, web and thumbnail paths*/
                 $path='storage/contest/'.$request->contest;
                 $path_thumb=$path.'/thumb';
@@ -100,9 +85,7 @@ class PhotoService
                 $path_thumb=$path_thumb.'/'.$resized->basename;
                 $this->photoRepository->Save($request->description,$user['id'],$contest->id,$photo,$path_web,$path_thumb);
                 return back()->with('success','Súbor úspešne nahraný!');
-            }
-        }else{
-            return back()->with('error','Nenahral si žiadny súbor!');}
+
     }
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContestPhotoRequest;
 use App\Repository\ContestRepository;
 use App\Repository\LikeRepository;
 use App\Repository\PhotoRepository;
@@ -88,7 +89,7 @@ class ContestController extends Controller
     /*
      * Upload processing
      */
-    public function upload_process(Request $request)
+    public function upload_process(ContestPhotoRequest $request)
     {
         return $this->photoService->savePhoto($request);
     }
