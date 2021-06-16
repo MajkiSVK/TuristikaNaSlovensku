@@ -39,8 +39,7 @@ class ContestController extends Controller
      */
     public function gallery(Request $request)
     {
-        /*Get contest details*/
-        $contest=$this->contestRepository->galleryFirstOrFail($request->contest);
+        $contest=$this->contestRepository->getContestBySlug($request->contest);
 
         return view('pages.contest.gallery')
                 ->with('contest', $contest);

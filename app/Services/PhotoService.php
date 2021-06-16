@@ -65,7 +65,7 @@ class PhotoService
                 $path_web=$path.'/web';
 
                 /*Get contest details*/
-                $contest=$this->contestRepository->galleryFirstOrFail($request->contest);
+                $contest=$this->contestRepository->getContestBySlug($request->contest);
 
                 /*Get user details*/
                 $user=$this->userRepository->FirstOrFail(session()->get('facebook_id'));
