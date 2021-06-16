@@ -4,9 +4,11 @@
 namespace App\Services;
 
 
+use App\Http\Requests\ContestPhotoRequest;
 use App\Repository\ContestRepository;
 use App\Repository\PhotoRepository;
 use App\Repository\UserRepository;
+use Illuminate\Http\RedirectResponse;
 use Intervention\Image\Facades\Image;
 
 class PhotoService
@@ -45,47 +47,39 @@ class PhotoService
         return $photo;
     }
 
-    /*
-     * Save uploaded photo
+    /**
+     * Resize and save uploaded photo with all important information
+     * @param ContestPhotoRequest $request
+     * @return RedirectResponse
      */
-    public function savePhoto($request)
+    public function savePhoto(ContestPhotoRequest $request): RedirectResponse
     {
                 /*defined upload, web and thumbnail paths*/
                 $path='storage/contest/'.$request->contest;
                 $path_thumb=$path.'/thumb';
                 $path_web=$path.'/web';
 
-                /*Get contest details*/
+                /*Get details for contest and store original photo*/
                 $contest=$this->contestRepository->getContestBySlug($request->contest);
-
-                /*Get user details*/
                 $user=$this->userService->getLoggedInUserData();
-
-                /*Save original photo and make "path" variable */
                 $photo=$request->photo->store($path);
 
-                /*Make thumb directory, if he is not existing*/
+                /*Create directories, if missing */
                 if (!file_exists($path_thumb)){
                     mkdir($path_thumb);
                 }
-
-                /*Make web directory, if he is not existing*/
                 if (!file_exists($path_web)){
                     mkdir($path_web);
                 }
 
-                /*Resize photo for web page */
+                /*Resize photo and store all information to the database*/
                 $resized=$this->photo_resize($photo,$path_web,'1920','1080');
-
-                /*resize and save for thumb*/
                 $this->photo_resize($photo,$path_thumb,'300','150');
-
-                /*Define photo paths for database*/
                 $path_web=$path_web.'/'.$resized->basename;
                 $path_thumb=$path_thumb.'/'.$resized->basename;
                 $this->photoRepository->Save($request->description,$user['id'],$contest->id,$photo,$path_web,$path_thumb);
-                return back()->with('success','Súbor úspešne nahraný!');
 
+                return back()->with('success','Súbor úspešne nahraný!');
     }
 
 
