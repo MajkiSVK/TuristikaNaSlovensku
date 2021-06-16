@@ -17,11 +17,6 @@ class ContestRepository
         return Contest::where('slug', $slug)->firstOrFail();
    }
 
-    public function getBySlug($request)
-    {
-        return Contest::where('slug', $request->contest)->FirstOrFail();
-   }
-
     public function getAllActiveContests()
     {
         return Contest::where('stop_vote', '>' , Carbon::now())->get();
