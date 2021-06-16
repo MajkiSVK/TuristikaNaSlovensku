@@ -9,25 +9,41 @@ use App\Repository\PhotoRepository;
 use App\Repository\UserRepository;
 use App\Services\PhotoService;
 use App\Services\UserService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
-use Intervention\Image\Facades\Image;
-
 
 class ContestController extends Controller
 {
+    /**
+     * @var ContestRepository
+     */
     private $contestRepository;
+
+    /**
+     * @var PhotoService
+     */
     private $photoService;
+
+    /**
+     * @var LikeRepository
+     */
     private $likeRepository;
+
+    /**
+     * @var PhotoRepository
+     */
     private $photoRepository;
+
+    /**
+     * @var UserRepository
+     */
     private $userRepository;
 
     /**
      * @var UserService
      */
     private $userService;
-
 
     public function __construct(ContestRepository $contestRepository,
                                 PhotoService $photoService,
@@ -36,7 +52,6 @@ class ContestController extends Controller
                                 UserRepository $userRepository,
                                 UserService $userService)
     {
-
         $this->contestRepository = $contestRepository;
         $this->photoService = $photoService;
         $this->likeRepository = $likeRepository;
@@ -44,10 +59,13 @@ class ContestController extends Controller
         $this->userRepository = $userRepository;
         $this->userService = $userService;
     }
-    /*
-     * Show gallery page
+
+    /**
+     * Show gallery page for user
+     * @param Request $request
+     * @return View
      */
-    public function gallery(Request $request)
+    public function gallery(Request $request):View
     {
         $contest=$this->contestRepository->getContestBySlug($request->contest);
 
@@ -76,20 +94,23 @@ class ContestController extends Controller
             ->with('like_number', $like_number);
     }
 
-    /*
-     * Show upload page
+    /**
+     * Show upload page for user
+     * @param Request $request
+     * @return View
      */
-    public function upload_page(Request $request)
+    public function upload_page(Request $request): View
     {
-        $contest=$this->contestRepository->getBySlug($request);
         return view('pages.contest.upload')
-            ->with('contest', $contest);
+            ->with('contest', $this->contestRepository->getBySlug($request));
     }
 
-    /*
-     * Upload processing
+    /**
+     * Image uploading process for contest
+     * @param ContestPhotoRequest $request
+     * @return RedirectResponse
      */
-    public function upload_process(ContestPhotoRequest $request)
+    public function upload_process(ContestPhotoRequest $request): RedirectResponse
     {
         return $this->photoService->savePhoto($request);
     }
