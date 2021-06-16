@@ -38,7 +38,7 @@ class PhotoService
      */
     public function GetPhotoWithNextPrev($request)
     {
-        $contest=$this->contestRepository->getContestBySlug($request);
+        $contest=$this->contestRepository->getContestBySlug($request->contest);
         $photo=$this->photoRepository->GetByContestIdFirstOrFail($contest,$request);
         $next= $this->photoRepository->GetNextId($contest,$photo);
         $prev= $this->photoRepository->GetPrevId($contest,$photo);

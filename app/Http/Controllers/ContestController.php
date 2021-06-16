@@ -102,7 +102,7 @@ class ContestController extends Controller
     public function upload_page(Request $request): View
     {
         return view('pages.contest.upload')
-            ->with('contest', $this->contestRepository->getContestBySlug($request));
+            ->with('contest', $this->contestRepository->getContestBySlug($request->contest));
     }
 
     /**
