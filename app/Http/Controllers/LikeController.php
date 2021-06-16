@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Like;
 use App\Repository\LikeRepository;
 use App\Services\LikeService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -14,11 +15,18 @@ class LikeController extends Controller
     private $likeRepository;
     private $likeService;
 
+    /**
+     * @var UserService
+     */
+    private $userService;
+
     public function __construct(LikeRepository $likeRepository,
-                                LikeService $likeService)
+                                LikeService $likeService,
+                                UserService $userService)
     {
         $this->likeRepository = $likeRepository;
         $this->likeService = $likeService;
+        $this->userService = $userService;
     }
 
     /*

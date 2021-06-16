@@ -7,6 +7,7 @@ use App\Repository\LikeRepository;
 use App\Repository\PhotoRepository;
 use App\Repository\UserRepository;
 use App\Services\PhotoService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
@@ -20,12 +21,18 @@ class ContestController extends Controller
     private $photoRepository;
     private $userRepository;
 
+    /**
+     * @var UserService
+     */
+    private $userService;
+
 
     public function __construct(ContestRepository $contestRepository,
                                 PhotoService $photoService,
                                 LikeRepository $likeRepository,
                                 PhotoRepository $photoRepository,
-                                UserRepository $userRepository)
+                                UserRepository $userRepository,
+                                UserService $userService)
     {
 
         $this->contestRepository = $contestRepository;
@@ -33,6 +40,7 @@ class ContestController extends Controller
         $this->likeRepository = $likeRepository;
         $this->photoRepository = $photoRepository;
         $this->userRepository = $userRepository;
+        $this->userService = $userService;
     }
     /*
      * Show gallery page
@@ -58,8 +66,6 @@ class ContestController extends Controller
 
         /*Check if a user already voted for this photo*/
         $like=$this->likeRepository->checkLike($this->userService->getFacebookId(),$url);
-
-        /*Like counter for specific URL*/
         $like_number=$this->likeRepository->likeCounter($url);
 
         return view('pages.contest.photo')
