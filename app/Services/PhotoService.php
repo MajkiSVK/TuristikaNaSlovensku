@@ -82,11 +82,15 @@ class PhotoService
                 return back()->with('success','Súbor úspešne nahraný!');
     }
 
-
-    /*
-     * Resize photo with specific parameters
+    /**
+     * Hepler function: Resize photo with specific parameters
+     * @param string $photo
+     * @param string $path
+     * @param int $width
+     * @param int $height
+     * @return \Intervention\Image\Image
      */
-    public function photo_resize($photo,$path,$width,$height)
+    private function photo_resize(string $photo,string $path,int $width,int $height): \Intervention\Image\Image
     {
         $resized=Image::make($photo);
 
@@ -94,15 +98,14 @@ class PhotoService
         if ($resized->width() < $width ) {$width=null;}
         if ($resized->height() < $height ) {$height=null;}
 
-        /*If height or width is defined*/
+        /*If height or width is defined, rezize image*/
         if($width || $height){
-            /*Resize and save for showing on the web*/
             $resized->resize($width, $height, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
         }
-        /*save photo to defined path*/
+
       return $resized->save($path.'/'.$resized->basename);
     }
 
