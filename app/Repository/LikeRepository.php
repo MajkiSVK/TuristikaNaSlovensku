@@ -27,14 +27,16 @@ class LikeRepository
        return $new_like->save();
     }
 
-    /*
-     * Delete like for photo, if a user voted (else error 404)
+    /**
+     * Delete like for photo, if a user voted
+     * @param int $facebook_id
+     * @param string $url
+     * @return bool
      */
-    public function delete_like($facebook_id,$url)
+    public function delete_like(int $facebook_id,string $url): bool
     {
         $like=Like::where('facebook_id', $facebook_id)->where('URL', $url)->firstOrFail();
-        $like->delete();
-        return back();
+        return $like->delete();
     }
 
     /*
