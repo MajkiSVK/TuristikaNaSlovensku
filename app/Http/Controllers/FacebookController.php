@@ -8,7 +8,6 @@ use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\URL;
 use Laravel\Socialite\Facades\Socialite;
 
 class FacebookController extends Controller
