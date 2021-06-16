@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Contest;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 class ContestRepository
 {
@@ -17,7 +18,11 @@ class ContestRepository
         return Contest::where('slug', $slug)->firstOrFail();
    }
 
-    public function getAllActiveContests()
+    /**
+     * Get list of active contests
+     * @return Collection
+     */
+    public function getAllActiveContests(): Collection
     {
         return Contest::where('stop_vote', '>' , Carbon::now())->get();
    }
