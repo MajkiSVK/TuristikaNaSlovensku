@@ -43,14 +43,6 @@ class LikeRepository
         return $like->delete();
     }
 
-    /*
-     * Check if the user already voted
-     */
-    public function checkLike($facebook_id,$url)
-    {
-        return  Like::where('facebook_id',$facebook_id)->where('URL', $url)->first();
-    }
-
     /**
      * Like counter for specific URL
      * @param string $url
