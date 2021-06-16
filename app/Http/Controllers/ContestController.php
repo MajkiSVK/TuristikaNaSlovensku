@@ -10,6 +10,7 @@ use App\Services\PhotoService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 use Intervention\Image\Facades\Image;
 
 
@@ -53,18 +54,18 @@ class ContestController extends Controller
                 ->with('contest', $contest);
     }
 
-    /*
-     * Show photo page
+    /**
+     * Get all information about specific photo and make view for her
+     * @param Request $request
+     * @return View
      */
-    public function photo(Request $request)
+    public function photo(Request $request): View
     {
         /*Get photo info with Next and Previous photo ID*/
         $photo=$this->photoService->GetPhotoWithNextPrev($request);
-
-        /*Create Unique url identifier*/
         $url=$request->contest.'/'.$photo->id;
 
-        /*Check if a user already voted for this photo*/
+        /*Check if a user already voted for this photo and counter all likes for specific photo*/
         $like=$this->likeRepository->checkLike($this->userService->getFacebookId(),$url);
         $like_number=$this->likeRepository->likeCounter($url);
 
