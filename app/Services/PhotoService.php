@@ -11,19 +11,25 @@ use Intervention\Image\Facades\Image;
 
 class PhotoService
 {
-
     private $photoRepository;
     private $contestRepository;
     private $userRepository;
 
+    /**
+     * @var UserService
+     */
+    private $userService;
+
     public function __construct(PhotoRepository $photoRepository,
                                 ContestRepository $contestRepository,
-                                UserRepository $userRepository)
+                                UserRepository $userRepository,
+                                UserService $userService)
     {
 
         $this->photoRepository = $photoRepository;
         $this->contestRepository = $contestRepository;
         $this->userRepository = $userRepository;
+        $this->userService = $userService;
     }
     /*
      * Get Photo info with Next and Prev IDs
@@ -68,7 +74,7 @@ class PhotoService
                 $contest=$this->contestRepository->getContestBySlug($request->contest);
 
                 /*Get user details*/
-                $user=$this->userRepository->FirstOrFail(session()->get('facebook_id'));
+                $user=$this->userService->getLoggedInUserData();
 
                 /*Save original photo and make "path" variable */
                 $photo=$request->photo->store($path);
