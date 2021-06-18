@@ -3,10 +3,12 @@
 namespace App\Services;
 
 use App\Http\Requests\ContestPhotoRequest;
+use App\Photo;
 use App\Repository\ContestRepository;
 use App\Repository\PhotoRepository;
 use App\Repository\UserRepository;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
 class PhotoService
@@ -42,10 +44,13 @@ class PhotoService
         $this->userRepository = $userRepository;
         $this->userService = $userService;
     }
-    /*
+
+    /**
      * Get Photo info with Next and Prev IDs
+     * @param Request $request
+     * @return Photo
      */
-    public function GetPhotoWithNextPrev($request)
+    public function GetPhotoWithNextPrev(Request $request): Photo
     {
         $contest=$this->contestRepository->getContestBySlug($request->contest);
         $photo=$this->photoRepository->GetPhotoByContestIdFirstOrFail($contest->id,$request->photo_id);
