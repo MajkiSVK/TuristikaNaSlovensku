@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Repository;
 
 use App\Photo;
@@ -40,10 +39,22 @@ class PhotoRepository
         return Photo::where('contest_id',$contest_id)->where('id','<',$photo_id)->max('id');
     }
 
-    /*
+    /**
      * Save the photo information
+     * @param string $description
+     * @param int $user_id
+     * @param int $contest_id
+     * @param string $original_path
+     * @param string $resized_path
+     * @param string $thumb_path
+     * @return bool
      */
-    public function Save($description,$user_id,$contest_id,$original_path,$resized_path,$thumb_path)
+    public function save(string $description,
+                         int $user_id,
+                         int $contest_id,
+                         string $original_path,
+                         string $resized_path,
+                         string $thumb_path): bool
     {
         $photo=new Photo();
         $photo->description = $description;
