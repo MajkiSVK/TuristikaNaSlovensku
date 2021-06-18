@@ -7,11 +7,27 @@ contest_gallery
 
 @section('container')
     <div class="row justify-content-between ">
-        <div class="d-none d-md-block col-md-4 text-break mt-3"><a href="{{URL::to($contest->slug)}}/gallery" class="btn btn-dark text-break">Galéria</a> </div>
-        <div class=" col-12 col-md-4 text-center mt-2"> <a href="{{URL::to(route('home'))}}"><img src="{{asset('storage/tns.png')}}" class="w-100"> </a></div>
+        <div class="d-none d-md-block col-md-4 text-break mt-3">
+            <a href="{{URL::to($contest->slug)}}/gallery" class="btn btn-dark text-break">
+                Galéria
+            </a>
+        </div>
+        <div class=" col-12 col-md-4 text-center mt-2">
+            <a href="{{URL::to(route('home'))}}">
+                <img src="{{asset('storage/tns.png')}}" class="w-100">
+            </a>
+        </div>
 
-            <div class="col-12 col-md-4 text-right text-break mt-3"><b><a href="{{URL::to(route('home'))}}">{{Session::get("user")->name}}</a></b>
-                <a href="{{URL::to(route('FbLogout'))}}" class="btn btn-primary text-break">Odhlásiť sa</a></div>
+        <div class="col-12 col-md-4 text-right text-break mt-3">
+            <b>
+                <a href="{{URL::to(route('home'))}}">
+                    {{Session::get("user")->name}}
+                </a>
+            </b>
+            <a href="{{URL::to(route('FbLogout'))}}" class="btn btn-primary text-break">
+                Odhlásiť sa
+            </a>
+        </div>
     </div>
     <hr>
    <h3> Nahrávanie súťažných fotiek pre súťaž : <b>{{$contest->name}}</b></h3>
