@@ -18,12 +18,15 @@ class PhotoRepository
         return Photo::where('contest_id',$contest_id)->where('id', $photo_id)->firstOrFail();
     }
 
-    /*
-     * Get next photo ID
+    /**
+     * Get next photo ID eith contest_id and photo_id
+     * @param int $contest_id
+     * @param int $photo_id
+     * @return int|null
      */
-    public function GetNextId($contest,$photo)
+    public function GetNextPhotoId(int $contest_id,int $photo_id): ?int
     {
-        return Photo::where('contest_id',$contest->id)->where('id','>',$photo->id)->min('id');
+        return Photo::where('contest_id',$contest_id)->where('id','>',$photo_id)->min('id');
     }
 
     /*
