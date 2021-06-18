@@ -50,8 +50,10 @@ class LikeController extends Controller
 
     /**
      * Delete like for specific photo
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function delete_like(Request $request)
+    public function delete_like(Request $request): RedirectResponse
     {
         $facebook_id=$this->userService->getFacebookId();
         $url=$request->slug.'/'.$request->photo_id;
