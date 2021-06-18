@@ -24,14 +24,10 @@ class UserService
 
     /**
      * Get User information from session
-     * @return User
+     * @return User|null
      */
-    public function getLoggedInUserData(): User
+    public function getLoggedInUserData(): ?User
     {
-        if(!Session::get('user')){
-            return new User();
-        }
-
         return Session::get('user');
     }
 

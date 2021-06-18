@@ -56,8 +56,9 @@ class FacebookController extends Controller
 
     /**
      * Redirection to the FB auth with specific scopes
+     * @return RedirectResponse
      */
-    public function redirect()
+    public function redirect(): RedirectResponse
     {
         return Socialite::driver('facebook')
             ->scopes('groups_access_member_info')
