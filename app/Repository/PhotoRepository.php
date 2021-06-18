@@ -29,12 +29,15 @@ class PhotoRepository
         return Photo::where('contest_id',$contest_id)->where('id','>',$photo_id)->min('id');
     }
 
-    /*
+    /**
      * Get previous photo ID
+     * @param int $contest_id
+     * @param int $photo_id
+     * @return int|null
      */
-    public function GetPrevId($contest,$photo)
+    public function GetPrevPhotoId(int $contest_id,int $photo_id): ?int
     {
-        return Photo::where('contest_id',$contest->id)->where('id','<',$photo->id)->max('id');
+        return Photo::where('contest_id',$contest_id)->where('id','<',$photo_id)->max('id');
     }
 
     /*
