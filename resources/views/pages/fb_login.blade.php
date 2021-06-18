@@ -16,10 +16,8 @@ facebook_login
 
         {{-- Facebook login button--}}
         <a href="{{URL::to('/facebook/redirect')}}">
-            <span id="login_button" class="login_button col-10 p-3 p-md-5 rounded-pill">
-                <img src="{{asset('storage/fb.png')}}" width="10%" class="mr-2">
+            <span id="login_button" class="btn btn-info text-light p-3 rounded-pill">
                Prihlásiť sa cez Facebook
-                <img src="{{asset('storage/fb.png')}}" width="10%" class="ml-2">
             </span>
         </a>
 
