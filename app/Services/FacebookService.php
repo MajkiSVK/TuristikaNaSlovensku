@@ -9,11 +9,11 @@ class FacebookService
      */
     public function IsMember(string $user_token): bool
     {
-        $client= new \GuzzleHttp\Client();
-        $url= 'https://graph.facebook.com/v9.0/me/groups';
-        $limit='100000';
-        $request= $client->get($url, ['query'=>['limit'=>$limit, 'access_token'=>$user_token]]);
-        $decoded=json_decode($request->getBody());
+        $client = new \GuzzleHttp\Client();
+        $url = 'https://graph.facebook.com/v9.0/me/groups';
+        $limit = '100000';
+        $request = $client->get($url, ['query'=>['limit'=>$limit, 'access_token'=>$user_token]]);
+        $decoded = json_decode($request->getBody());
 
         foreach ($decoded->data as $group){
 

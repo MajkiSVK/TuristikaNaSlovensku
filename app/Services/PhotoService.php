@@ -52,10 +52,10 @@ class PhotoService
      */
     public function GetPhotoWithNextPrev(Request $request): Photo
     {
-        $contest=$this->contestRepository->getContestBySlug($request->contest);
-        $photo=$this->photoRepository->GetPhotoByContestIdFirstOrFail($contest->id,$request->photo_id);
-        $next= $this->photoRepository->GetNextPhotoId($contest->id,$photo->id);
-        $prev= $this->photoRepository->GetPrevPhotoId($contest->id,$photo->id);
+        $contest = $this->contestRepository->getContestBySlug($request->contest);
+        $photo = $this->photoRepository->GetPhotoByContestIdFirstOrFail($contest->id,$request->photo_id);
+        $next = $this->photoRepository->GetNextPhotoId($contest->id,$photo->id);
+        $prev = $this->photoRepository->GetPrevPhotoId($contest->id,$photo->id);
         $photo->setRelation('next',$next);
         $photo->SetRelation('prev',$prev);
         return $photo;
@@ -69,14 +69,14 @@ class PhotoService
     public function savePhoto(ContestPhotoRequest $request): RedirectResponse
     {
                 /*defined upload, web and thumbnail paths*/
-                $path='storage/contest/'.$request->contest;
-                $path_thumb=$path.'/thumb';
-                $path_web=$path.'/web';
+                $path = 'storage/contest/'.$request->contest;
+                $path_thumb = $path.'/thumb';
+                $path_web = $path.'/web';
 
                 /*Get details for contest and store original photo*/
-                $contest=$this->contestRepository->getContestBySlug($request->contest);
-                $user=$this->userService->getLoggedInUserData();
-                $photo=$request->photo->store($path);
+                $contest = $this->contestRepository->getContestBySlug($request->contest);
+                $user = $this->userService->getLoggedInUserData();
+                $photo = $request->photo->store($path);
 
                 /*Create directories, if missing */
                 if (!file_exists($path_thumb)){
@@ -87,10 +87,10 @@ class PhotoService
                 }
 
                 /*Resize photo and store all information to the database*/
-                $resized=$this->photo_resize($photo,$path_web,'1920','1080');
+                $resized = $this->photo_resize($photo,$path_web,'1920','1080');
                 $this->photo_resize($photo,$path_thumb,'300','150');
-                $path_web=$path_web.'/'.$resized->basename;
-                $path_thumb=$path_thumb.'/'.$resized->basename;
+                $path_web = $path_web.'/'.$resized->basename;
+                $path_thumb = $path_thumb.'/'.$resized->basename;
                 $this->photoRepository->Save($request->description,$user['id'],$contest->id,$photo,$path_web,$path_thumb);
 
                 return back()->with('success','Súbor úspešne nahraný!');
@@ -109,8 +109,8 @@ class PhotoService
         $resized=Image::make($photo);
 
         /*Compare actual size with defined*/
-        if ($resized->width() < $width ) {$width=null;}
-        if ($resized->height() < $height ) {$height=null;}
+        if ($resized->width() < $width ) {$width = null;}
+        if ($resized->height() < $height ) {$height = null;}
 
         /*If height or width is defined, rezize image*/
         if($width || $height){

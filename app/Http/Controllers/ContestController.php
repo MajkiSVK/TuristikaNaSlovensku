@@ -81,12 +81,12 @@ class ContestController extends Controller
     public function photo(Request $request): View
     {
         /*Get photo info with Next and Previous photo ID*/
-        $photo=$this->photoService->GetPhotoWithNextPrev($request);
+        $photo = $this->photoService->GetPhotoWithNextPrev($request);
         $url=$request->contest.'/'.$photo->id;
 
         /*Check if a user already voted for this photo and counter all likes for specific photo*/
-        $like=$this->likeRepository->check_like($this->userService->getFacebookId(),$url);
-        $like_number=$this->likeRepository->likeCounter($url);
+        $like = $this->likeRepository->check_like($this->userService->getFacebookId(),$url);
+        $like_number = $this->likeRepository->likeCounter($url);
 
         return view('pages.contest.photo')
             ->with('photo', $photo)

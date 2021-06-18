@@ -43,9 +43,9 @@ class HomeController extends Controller
      */
     public function main(): View
     {
-        $user=$this->userRepository->GetUserByFacebookId($this->userService->getFacebookId());
-        $user->contact_mail=$this->userService->getUserContactMail();
-        $contests=$this->contestRepository->getAllActiveContests();
+        $user = $this->userRepository->GetUserByFacebookId($this->userService->getFacebookId());
+        $user->contact_mail = $this->userService->getUserContactMail();
+        $contests = $this->contestRepository->getAllActiveContests();
         return view('pages.home')
                     ->with('user', $user)
                     ->with('active_contests', $contests);
@@ -60,7 +60,8 @@ class HomeController extends Controller
     {
         $this->userService->saveUserContactInformation($request);
 
-        return back()->with('success', 'Tvoje údaje boli úspešne uložené');
+        return back()
+            ->with('success', 'Tvoje údaje boli úspešne uložené');
     }
 
     /**
@@ -70,7 +71,8 @@ class HomeController extends Controller
     public function delete_contact(): RedirectResponse
     {
         $this->userService->removeUserContactInformation();
-        return back()->with('success', 'Tvoje údaje boli úspešne vymazané');
+        return back()
+            ->with('success', 'Tvoje údaje boli úspešne vymazané');
     }
 
     /**
@@ -81,6 +83,7 @@ class HomeController extends Controller
     {
         $this->userService->deleteUserProfile();
         Session::forget(['user']);
-        return Redirect::to(route('FbLogin'))->with('success','Tvoj profil bol úspešne vymazaný.');
+        return Redirect::to(route('FbLogin'))
+            ->with('success','Tvoj profil bol úspešne vymazaný.');
     }
 }

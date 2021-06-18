@@ -25,9 +25,9 @@ class LikeRepository
      */
     public function add_like(int $facebook_id,string $url): bool
     {
-        $new_like=new Like();
-        $new_like->facebook_id=$facebook_id;
-        $new_like->URL=$url;
+        $new_like = new Like();
+        $new_like->facebook_id = $facebook_id;
+        $new_like->URL = $url;
        return $new_like->save();
     }
 

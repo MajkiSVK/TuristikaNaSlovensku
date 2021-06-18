@@ -15,10 +15,10 @@ class UserRepository
     public function UpdateOrCreate($user)
     {
 
-        $id=['facebook_id'=> $user->getId()];
-        $table=[
-                'name'=> $user->getName(),
-                'email'=> $user->getEmail()];
+        $id = ['facebook_id' => $user->getId()];
+        $table = [
+                'name' => $user->getName(),
+                'email' => $user->getEmail()];
 
         return User::updateOrCreate($id,$table);
     }
@@ -41,8 +41,8 @@ class UserRepository
      */
     public function SaveUserPhoneNumber(int $facebook_id,SaveUserContactRequest $request): User
     {
-        $user= User::WHERE('facebook_id', $facebook_id)->firstOrFail();
-        $user->phone_number=$request->user_phone;
+        $user = User::WHERE('facebook_id', $facebook_id)->firstOrFail();
+        $user->phone_number = $request->user_phone;
         $user->save();
 
         return $user;
@@ -55,8 +55,8 @@ class UserRepository
      */
     public function RemoveUserPhoneNumber(int $facebook_id): User
     {
-        $user= User::WHERE('facebook_id', $facebook_id)->firstOrFail();
-        $user->phone_number=NULL;
+        $user = User::WHERE('facebook_id', $facebook_id)->firstOrFail();
+        $user->phone_number = NULL;
         $user->save();
 
         return $user;
@@ -69,7 +69,7 @@ class UserRepository
      */
     public function DeleteUserProfile($facebook_id): bool
     {
-        $user= User::WHERE('facebook_id', $facebook_id)->firstOrFail();
+        $user = User::WHERE('facebook_id', $facebook_id)->firstOrFail();
         return $user->delete();
     }
 

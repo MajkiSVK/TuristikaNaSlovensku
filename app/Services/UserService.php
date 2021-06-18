@@ -55,8 +55,8 @@ class UserService
 
         return $user->settings()->updateOrCreate(
             ['type' => 'contact_mail'],
-            ['value'=> $request->contact_mail,
-             'type'=> 'contact_mail',
+            ['value' => $request->contact_mail,
+             'type' => 'contact_mail',
              'expiration' => Carbon::now()
             ]);
     }
@@ -86,7 +86,7 @@ class UserService
      */
     public function generatePreviousURL(): void
     {
-        if (URL::previous()===URL::route('FbLogin')){
+        if (URL::previous() === URL::route('FbLogin')){
             Session::put('previous_url', URL::route('home'));
         }
 

@@ -41,9 +41,9 @@ class LikeController extends Controller
      */
     public function add_like(Request $request): RedirectResponse
     {
-        $facebook_id=$this->userService->getFacebookId();
+        $facebook_id = $this->userService->getFacebookId();
         /* Make unique "URL" key */
-        $url=$request->slug.'/'.$request->photo_id;
+        $url = $request->slug.'/'.$request->photo_id;
 
         return $this->likeService->add_like($facebook_id,$url);
     }
@@ -55,8 +55,8 @@ class LikeController extends Controller
      */
     public function delete_like(Request $request): RedirectResponse
     {
-        $facebook_id=$this->userService->getFacebookId();
-        $url=$request->slug.'/'.$request->photo_id;
+        $facebook_id = $this->userService->getFacebookId();
+        $url = $request->slug.'/'.$request->photo_id;
         $this->likeRepository->delete_like($facebook_id,$url);
 
         return back();
