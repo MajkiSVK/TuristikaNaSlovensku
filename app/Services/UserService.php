@@ -8,6 +8,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 
 class UserService
 {
@@ -78,5 +79,17 @@ class UserService
     public function deleteUserProfile(): bool
     {
         return $this->userRepository->DeleteUserProfile($this->getFacebookId());
+    }
+
+    /**
+     * Generate session for previous URL
+     */
+    public function generatePreviousURL(): void
+    {
+        if (URL::previous()===URL::route('FbLogin')){
+            Session::put('previous_url', URL::route('home'));
+        }
+
+        Session::put('previous_url', URL::previous());
     }
 }

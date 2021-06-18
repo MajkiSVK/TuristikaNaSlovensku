@@ -1,25 +1,29 @@
 <?php
 
-
 namespace App\Repository;
-
 
 use App\Like;
 
 class LikeRepository
 {
-    /*
+    /**
      * Check, if a user already voted for the photo
+     * @param int $facebook_id
+     * @param string $url
+     * @return mixed
      */
-    public function check_like($facebook_id,$url)
+    public function check_like(int $facebook_id,string $url)
     {
         return Like::where('facebook_id',$facebook_id)->where('URL', $url)->first();
    }
 
-   /*
-    * Add like for photo
-    */
-    public function add_like($facebook_id,$url)
+    /**
+     * Add like for photo
+     * @param int $facebook_id
+     * @param string $url
+     * @return bool
+     */
+    public function add_like(int $facebook_id,string $url): bool
     {
         $new_like=new Like();
         $new_like->facebook_id=$facebook_id;
@@ -27,28 +31,24 @@ class LikeRepository
        return $new_like->save();
     }
 
-    /*
-     * Delete like for photo, if a user voted (else error 404)
+    /**
+     * Delete like for photo, if a user voted
+     * @param int $facebook_id
+     * @param string $url
+     * @return bool
      */
-    public function delete_like($facebook_id,$url)
+    public function delete_like(int $facebook_id,string $url): bool
     {
         $like=Like::where('facebook_id', $facebook_id)->where('URL', $url)->firstOrFail();
-        $like->delete();
-        return back();
+        return $like->delete();
     }
 
-    /*
-     * Check if the user already voted
-     */
-    public function checkLike($facebook_id,$url)
-    {
-        return  Like::where('facebook_id',$facebook_id)->where('URL', $url)->first();
-    }
-
-    /*
+    /**
      * Like counter for specific URL
+     * @param string $url
+     * @return int
      */
-    public function likeCounter($url)
+    public function likeCounter(string $url): int
     {
         return Like::where('URL', $url)->count();
     }
