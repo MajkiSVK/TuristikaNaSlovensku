@@ -92,4 +92,13 @@ class UserService
 
         Session::put('previous_url', URL::previous());
     }
+
+    /**
+     * Get user contact mail via relationship with user_settings table
+     * @return string
+     */
+    public function getUserContactMail(): string
+    {
+        return $this->getLoggedInUserData()->settings()->where('type', 'contact_mail')->first()->value ?? "";
+    }
 }

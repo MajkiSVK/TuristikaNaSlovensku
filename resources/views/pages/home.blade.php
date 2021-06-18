@@ -71,7 +71,7 @@ home
                         Kontaktný E-mail
                     </b>
                 </label>
-                <input name="contact_mail" type="email" class="col-5 mb-3" value="{{old('contact_mail') ?? $user->settings()->where('type', 'contact_mail')->first()->value ?? ''}}">
+                <input name="contact_mail" type="email" class="col-5 mb-3" value="{{old('contact_mail') ?? $user->contact_mail}}">
 
                 <div id="empty" class="col-12 text-center">
                     <i>
