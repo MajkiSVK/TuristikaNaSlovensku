@@ -44,7 +44,8 @@ class HomeController extends Controller
     public function main(): View
     {
         $user=$this->userRepository->GetUserByFacebookId($this->userService->getFacebookId());
-        $contests= $this->contestRepository->getAllActiveContests();
+        $user->contact_mail=$this->userService->getUserContactMail();
+        $contests=$this->contestRepository->getAllActiveContests();
         return view('pages.home')
                     ->with('user', $user)
                     ->with('active_contests', $contests);
