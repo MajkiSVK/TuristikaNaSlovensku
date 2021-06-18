@@ -7,12 +7,15 @@ use App\Photo;
 
 class PhotoRepository
 {
-    /*
+    /**
      * Get the photo with Contest_id and photo ID
+     * @param int $contest_id
+     * @param int $photo_id
+     * @return Photo
      */
-    public function GetByContestIdFirstOrFail($contest,$request)
+    public function GetPhotoByContestIdFirstOrFail(int $contest_id,int $photo_id): Photo
     {
-        return Photo::where('contest_id',$contest->id)->where('id', $request->photo_id)->firstOrFail();
+        return Photo::where('contest_id',$contest_id)->where('id', $photo_id)->firstOrFail();
     }
 
     /*
