@@ -18,7 +18,7 @@ class FacebookController extends Controller
     /**
      * @var FacebookService
      */
-    private $FacebookService;
+    private $facebookService;
 
     /**
      * @var UserService
@@ -28,14 +28,14 @@ class FacebookController extends Controller
     /**
      * @var UserRepository
      */
-    private $UserRepository;
+    private $userRepository;
 
     public function __construct(FacebookService $facebookService,
                                 UserRepository $userRepository,
                                 UserService $userService)
     {
-        $this->FacebookService=$facebookService;
-        $this->UserRepository=$userRepository;
+        $this->facebookService=$facebookService;
+        $this->userRepository=$userRepository;
         $this->userService = $userService;
     }
     /**
@@ -70,8 +70,8 @@ class FacebookController extends Controller
     public function callback(): RedirectResponse
     {
         $user = Socialite::driver('facebook')->user();
-        $userToLogIn=$this->UserRepository->UpdateOrCreate($user);
-        $userToLogIn->member=$this->FacebookService->IsMember($user->token);
+        $userToLogIn=$this->userRepository->UpdateOrCreate($user);
+        $userToLogIn->member=$this->facebookService->IsMember($user->token);
 
         Session::put('user', $userToLogIn);
 
