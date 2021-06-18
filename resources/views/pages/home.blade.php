@@ -71,7 +71,7 @@ home
                         Kontaktný E-mail
                     </b>
                 </label>
-                <input name="contact_mail" type="email" class="col-5 mb-3" value="{{$user->settings()->where('type', 'contact_mail')->first()->value ?? ''}}">
+                <input name="contact_mail" type="email" class="col-5 mb-3" value="{{old('contact_mail') ?? $user->settings()->where('type', 'contact_mail')->first()->value ?? ''}}">
 
                 <div id="empty" class="col-12 text-center">
                     <i>
@@ -87,7 +87,7 @@ home
                         Telefónne číslo: +
                     </b>
                 </label>
-                <input name="user_phone" type="tel" class="col-5 mb-3" pattern="[0-9]{12}" value="{{$user['phone_number']}}">
+                <input name="user_phone" type="tel" class="col-5 mb-3" pattern="[0-9]{12}" value="{{old('user_phone') ?? $user['phone_number']}}">
 
                 {{--info text--}}
                 <div id="info" class="col-12 text-center">

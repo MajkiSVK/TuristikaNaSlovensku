@@ -37,12 +37,12 @@ contest_gallery
             @csrf
             <div class="form-group">
                 <label for="description">Popis fotky</label>
-                <input type="text" id="description" name="description" class="form-control" placeholder="Podľa pravidiel súťaže">
+                <input type="text" id="description" name="description" class="form-control" placeholder="Podľa pravidiel súťaže" value="{{old("description")}}">
             </div>
 
             <div class="form-group">
                 <label for="photo">Súťažná fotografia</label>
-                <input type="file" id="photo" name="photo" class="form-control-file">
+                <input type="file" id="photo" name="photo" class="form-control-file" >
             </div>
             <button type="submit" class="btn btn-success d-block w-75 mx-auto mb-5">Nahrať</button>
         </form>
