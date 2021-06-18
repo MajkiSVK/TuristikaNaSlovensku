@@ -1,40 +1,60 @@
 <?php
 
-
 namespace App\Repository;
 
 use App\Photo;
 
 class PhotoRepository
 {
-    /*
+    /**
      * Get the photo with Contest_id and photo ID
+     * @param int $contest_id
+     * @param int $photo_id
+     * @return Photo
      */
-    public function GetByContestIdFirstOrFail($contest,$request)
+    public function GetPhotoByContestIdFirstOrFail(int $contest_id,int $photo_id): Photo
     {
-        return Photo::where('contest_id',$contest->id)->where('id', $request->photo_id)->firstOrFail();
+        return Photo::where('contest_id',$contest_id)->where('id', $photo_id)->firstOrFail();
     }
 
-    /*
-     * Get next photo ID
+    /**
+     * Get next photo ID eith contest_id and photo_id
+     * @param int $contest_id
+     * @param int $photo_id
+     * @return int|null
      */
-    public function GetNextId($contest,$photo)
+    public function GetNextPhotoId(int $contest_id,int $photo_id): ?int
     {
-        return Photo::where('contest_id',$contest->id)->where('id','>',$photo->id)->min('id');
+        return Photo::where('contest_id',$contest_id)->where('id','>',$photo_id)->min('id');
     }
 
-    /*
+    /**
      * Get previous photo ID
+     * @param int $contest_id
+     * @param int $photo_id
+     * @return int|null
      */
-    public function GetPrevId($contest,$photo)
+    public function GetPrevPhotoId(int $contest_id,int $photo_id): ?int
     {
-        return Photo::where('contest_id',$contest->id)->where('id','<',$photo->id)->max('id');
+        return Photo::where('contest_id',$contest_id)->where('id','<',$photo_id)->max('id');
     }
 
-    /*
+    /**
      * Save the photo information
+     * @param string $description
+     * @param int $user_id
+     * @param int $contest_id
+     * @param string $original_path
+     * @param string $resized_path
+     * @param string $thumb_path
+     * @return bool
      */
-    public function Save($description,$user_id,$contest_id,$original_path,$resized_path,$thumb_path)
+    public function save(string $description,
+                         int $user_id,
+                         int $contest_id,
+                         string $original_path,
+                         string $resized_path,
+                         string $thumb_path): bool
     {
         $photo=new Photo();
         $photo->description = $description;

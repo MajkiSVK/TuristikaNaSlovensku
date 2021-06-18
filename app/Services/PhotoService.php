@@ -1,20 +1,31 @@
 <?php
 
-
 namespace App\Services;
 
-
 use App\Http\Requests\ContestPhotoRequest;
+use App\Photo;
 use App\Repository\ContestRepository;
 use App\Repository\PhotoRepository;
 use App\Repository\UserRepository;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
 class PhotoService
 {
+    /**
+     * @var PhotoRepository
+     */
     private $photoRepository;
+
+    /**
+     * @var ContestRepository
+     */
     private $contestRepository;
+
+    /**
+     * @var UserRepository
+     */
     private $userRepository;
 
     /**
@@ -33,15 +44,18 @@ class PhotoService
         $this->userRepository = $userRepository;
         $this->userService = $userService;
     }
-    /*
+
+    /**
      * Get Photo info with Next and Prev IDs
+     * @param Request $request
+     * @return Photo
      */
-    public function GetPhotoWithNextPrev($request)
+    public function GetPhotoWithNextPrev(Request $request): Photo
     {
         $contest=$this->contestRepository->getContestBySlug($request->contest);
-        $photo=$this->photoRepository->GetByContestIdFirstOrFail($contest,$request);
-        $next= $this->photoRepository->GetNextId($contest,$photo);
-        $prev= $this->photoRepository->GetPrevId($contest,$photo);
+        $photo=$this->photoRepository->GetPhotoByContestIdFirstOrFail($contest->id,$request->photo_id);
+        $next= $this->photoRepository->GetNextPhotoId($contest->id,$photo->id);
+        $prev= $this->photoRepository->GetPrevPhotoId($contest->id,$photo->id);
         $photo->setRelation('next',$next);
         $photo->SetRelation('prev',$prev);
         return $photo;
