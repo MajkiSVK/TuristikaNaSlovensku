@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Services;
-
 
 use App\Http\Requests\ContestPhotoRequest;
 use App\Repository\ContestRepository;
@@ -13,8 +11,19 @@ use Intervention\Image\Facades\Image;
 
 class PhotoService
 {
+    /**
+     * @var PhotoRepository
+     */
     private $photoRepository;
+
+    /**
+     * @var ContestRepository
+     */
     private $contestRepository;
+
+    /**
+     * @var UserRepository
+     */
     private $userRepository;
 
     /**
