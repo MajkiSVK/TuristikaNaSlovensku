@@ -71,6 +71,7 @@ class FacebookController extends Controller
     {
         $user = Socialite::driver('facebook')->user();
         $userToLogIn=$this->UserRepository->UpdateOrCreate($user);
+        $userToLogIn->member=$this->FacebookService->IsMember($user->token);
 
         Session::put('user', $userToLogIn);
 

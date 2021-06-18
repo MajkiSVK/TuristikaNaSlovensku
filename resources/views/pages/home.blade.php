@@ -17,6 +17,18 @@ home
             <form method="post" action="{{URL::route('save_profile')}}">
                 @csrf
 
+                {{--Membership information--}}
+                @if(Session::get("user")->member)
+                <label for="user_name" class="col-3 text-right mb-3"><b>Členstvo</b></label>
+                <input name="user_name" type="text" class="col-5 mb-3" value="Si členom FB skupiny Turistika na Slovensku" disabled>
+                @else
+                    <label for="user_name" class="col-3 text-right mb-3"><b>Členstvo</b>
+                    <a href="https://www.facebook.com/groups/82618591890" class="btn btn-outline-secondary" target="_blank">Stať sa členom</a>
+                    </label>
+                    <input name="user_name" type="text" class="col-5 mb-3" value="Niesi členom FB skupiny Turistika na Slovensku" disabled>
+                @endif
+                <div id="empty" class="col-12"></div>
+
                 {{--user name input--}}
                 <label for="user_name" class="col-3 text-right mb-3"><b>Meno</b></label>
                 <input name="user_name" type="text" class="col-5 mb-3" value="{{$user['name']}}" disabled>

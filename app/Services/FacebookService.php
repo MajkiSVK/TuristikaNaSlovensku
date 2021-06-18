@@ -6,10 +6,10 @@ namespace App\Services;
 
 class FacebookService
 {
-    /*
+    /**
      * Check, if the user is a member of FB group Turistika na Slovensku
      */
-    public function IsMember($user_token)
+    public function IsMember(string $user_token): bool
     {
         $client= new \GuzzleHttp\Client();
         $url= 'https://graph.facebook.com/v9.0/me/groups';
