@@ -12,6 +12,8 @@ facebook_login
         {{-- Facebook group logo--}}
         <img src="{{asset('storage/tns.png')}}" width="60%" class="m-0">
 
+        <p class="col-12 text-center"> Vitajte na stránkach <b>Facebook skupiny Turistika na Slovensku</b><br> Aby ste sa mohli zúčastniť našich súťaží, musíte sa prihlásiť</p>
+
         {{-- Facebook login button--}}
         <a href="{{URL::to('/facebook/redirect')}}">
             <span id="login_button" class="login_button col-10 p-3 p-md-5 rounded-pill">
