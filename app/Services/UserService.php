@@ -24,14 +24,10 @@ class UserService
 
     /**
      * Get User information from session
-     * @return User
+     * @return User|null
      */
-    public function getLoggedInUserData(): User
+    public function getLoggedInUserData(): ?User
     {
-        if(!Session::get('user')){
-            return new User();
-        }
-
         return Session::get('user');
     }
 
@@ -55,8 +51,8 @@ class UserService
 
         return $user->settings()->updateOrCreate(
             ['type' => 'contact_mail'],
-            ['value'=> $request->contact_mail,
-             'type'=> 'contact_mail',
+            ['value' => $request->contact_mail,
+             'type' => 'contact_mail',
              'expiration' => Carbon::now()
             ]);
     }
@@ -86,7 +82,7 @@ class UserService
      */
     public function generatePreviousURL(): void
     {
-        if (URL::previous()===URL::route('FbLogin')){
+        if (URL::previous() === URL::route('FbLogin')){
             Session::put('previous_url', URL::route('home'));
         }
 

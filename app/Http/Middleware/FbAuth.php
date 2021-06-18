@@ -29,7 +29,7 @@ class FbAuth
 
     public function handle($request, Closure $next)
     {
-        if($this->userService->getFacebookId() !== 0 ){
+        if($this->userService->getLoggedInUserData() ){
             return $next($request);
         }
             return redirect(route('FbLogin'));

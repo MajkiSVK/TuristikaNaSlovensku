@@ -9,7 +9,7 @@ class Contest extends Model
     /*
     * Fillable columns in the table
     */
-    protected $fillable=[
+    protected $fillable = [
         'name',
         'slug',
         'photo_limit',

@@ -34,8 +34,8 @@ class FacebookController extends Controller
                                 UserRepository $userRepository,
                                 UserService $userService)
     {
-        $this->facebookService=$facebookService;
-        $this->userRepository=$userRepository;
+        $this->facebookService = $facebookService;
+        $this->userRepository = $userRepository;
         $this->userService = $userService;
     }
     /**
@@ -56,8 +56,9 @@ class FacebookController extends Controller
 
     /**
      * Redirection to the FB auth with specific scopes
+     * @return RedirectResponse
      */
-    public function redirect()
+    public function redirect(): RedirectResponse
     {
         return Socialite::driver('facebook')
             ->scopes('groups_access_member_info')
@@ -70,7 +71,7 @@ class FacebookController extends Controller
     public function callback(): RedirectResponse
     {
         $user = Socialite::driver('facebook')->user();
-        $userToLogIn=$this->userRepository->UpdateOrCreate($user);
+        $userToLogIn = $this->userRepository->UpdateOrCreate($user);
         $userToLogIn->member=$this->facebookService->IsMember($user->token);
 
         Session::put('user', $userToLogIn);

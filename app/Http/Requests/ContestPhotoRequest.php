@@ -24,17 +24,17 @@ class ContestPhotoRequest extends FormRequest
     public function rules()
     {
         return [
-            'description'=>'required|string|max:100',
-            'photo'=>'required|mimes:jpg,jpeg,png'
+            'description' => 'required|string|max:100',
+            'photo' => 'required|mimes:jpg,jpeg,png'
         ];
     }
 
     public function messages()
     {
         return [
-        'description.required'=>'Nezadal si žiadny popis fotky',
-        'photo.mimes'=>'Je dovolené nahrať fotky iba nasledujúcich formátoch: :values',
-        'photo.required'=>'Nenahral si žiadny súbor'
+        'description.required' => 'Nezadal si žiadny popis fotky',
+        'photo.mimes' => 'Je dovolené nahrať fotky iba nasledujúcich formátoch: :values',
+        'photo.required' => 'Nenahral si žiadny súbor'
         ];
     }
 }

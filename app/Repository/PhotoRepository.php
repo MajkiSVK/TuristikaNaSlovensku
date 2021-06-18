@@ -56,13 +56,13 @@ class PhotoRepository
                          string $resized_path,
                          string $thumb_path): bool
     {
-        $photo=new Photo();
+        $photo = new Photo();
         $photo->description = $description;
-        $photo->user_id=$user_id;
-        $photo->contest_id=$contest_id;
-        $photo->original_path=$original_path;
-        $photo->resized_path=$resized_path;
-        $photo->thumb_path=$thumb_path;
+        $photo->user_id = $user_id;
+        $photo->contest_id = $contest_id;
+        $photo->original_path = $original_path;
+        $photo->resized_path = $resized_path;
+        $photo->thumb_path = $thumb_path;
 
         return $photo->save();
     }
